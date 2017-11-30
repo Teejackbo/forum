@@ -34,6 +34,10 @@ Route
   .as('storeCategory')
 
 Route
+  .get('/categories/:id', 'CategoryController.view')
+  .as('viewCategory')
+
+Route
   .get('login', 'UserController.index')
   .as('loginForm')
 

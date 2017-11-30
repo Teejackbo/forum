@@ -11,6 +11,14 @@ class CategoryController {
       categories: categories.toJSON()
     })
   }
+
+  async view({ view, params }) {
+    const category = await Category.find(params.id)
+    return view.render('categories.details', {
+      title: category.title,
+      category: category.toJSON()
+    })
+  }
 }
 
 module.exports = CategoryController

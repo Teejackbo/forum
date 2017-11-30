@@ -7,6 +7,9 @@
       <div class="category">
         <h2>{{ category.title }}</h2>
         <p>{{ category.description }}</p>
+        <a href="/categories/{{ category.id }}">
+          <button class="btn">Read</button>
+        </a>
       </div>
     @endeach
   </ul>
