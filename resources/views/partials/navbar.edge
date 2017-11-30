@@ -1,0 +1,52 @@
+<nav class="bg-teal">
+  <div class="container">
+    <a href="/"><h1 class="u-float-l">Jack's Forum</h1></a>
+    <ul class="u-float-r">
+      <li>
+        <a href="/">
+          <div>
+            Home
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('showCategories') }}">
+          <div>
+            Categories
+          </div>
+        </a>
+      </li>
+      @loggedIn
+        <li>
+          <a href="/profile/{{ auth.user.username }}">
+            <div>
+              My Profile
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('logout') }}">
+            <div>
+              Logout
+            </div>
+          </a>
+        </li>
+      @else
+        <li>
+          <a href="{{ route('loginForm') }}">
+            <div>
+              Login
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('registerForm') }}">
+            <div>
+              Register
+            </div>
+          </a>
+        </li>
+      @endloggedIn
+    </ul>
+  </div>
+</nav>

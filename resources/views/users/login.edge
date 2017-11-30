@@ -1,0 +1,23 @@
+@layout('layouts.main')
+
+@section('content')
+  <form action="{{ route('login') }}" method="POST">
+  {{ csrfField() }}
+  <div class="form-field mtb-1">
+    <label for="email" class="pb-1">Email:</label>
+    <input type="email" name="email" placeholder="Enter your email." value="{{ old('email', '') }}">
+    {{ elIf('<div class="alert alert-dg mt-1 w-20">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
+  </div>
+  <div class="form-field mtb-1">
+    <label for="password" class="pb-1">Password:</label>
+    <input type="password" name="password" placeholder="Enter your password.">
+    {{ elIf('<div class="alert alert-dg mt-1 w-20">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
+  </div>
+  <button type="submit" class="btn btn-go">Login</button>
+</form>
+  @if(old('notificationError'))
+    <div class="alert alert-dg w-30 mtb-1">
+      {{ old('notificationError') }}
+    </div>
+  @endif
+@endsection

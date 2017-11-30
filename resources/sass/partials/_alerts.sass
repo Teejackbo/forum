@@ -1,0 +1,20 @@
+.alert
+  border-radius: 5px
+  padding: 1em
+  background: $grey-darken-3
+  color: white
+  animation: fadeOutAfter4 4s ease-in 1 forwards
+
+  &::after
+    content: '\00D7'
+    float: right
+    font-size: 2em
+    position: relative
+    top: -8px
+    cursor: pointer
+
+.alert-dg
+  background: $red-darken-1
+
+.alert-success
+  background: $green

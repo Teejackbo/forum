@@ -1,0 +1,35 @@
+nav
+  overflow: hidden
+  border-bottom: 5px solid $deep-orange
+
+  li
+    display: inline-block
+    font-size: 1.1em
+    border-radius: 5px
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2)
+    background: $deep-orange-darken-1
+    margin: 0.9em 0.3em
+    position: relative
+    transition: 0.2s
+
+    div
+      padding: 0.7em
+
+
+    &:hover
+      background: $deep-orange
+      box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15)
+      top: -2px
+    
+    &:active
+      background: $deep-orange-darken-1
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2)
+      top: 0
+
+    a
+      color: $grey-darken-4
+
+  h1
+    padding: 0.7em 0
+    color: $black
+    font-family: "Montserrat", sans-serif

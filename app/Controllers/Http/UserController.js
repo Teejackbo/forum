@@ -1,0 +1,97 @@
+'use strict'
+
+const User = use('App/Models/User')
+const { validate } = use('Validator')
+
+class UserController {
+  async index({ view }) {
+    return view.render('users.login', {
+      title: 'Login'
+    })
+  }
+
+  async login({ request, response, auth, session }) {
+    const { email, password } = request.all()
+
+    const messages = {
+      'email.required': 'Please enter an email.',
+      'password.required': 'Please enter a password.'
+    }
+
+    const validation = await validate(request.all(), {
+      email: 'required',
+      password: 'required'
+    }, messages)
+
+    if (validation.fails()) {
+      session.withErrors(validation.messages()).flashAll()
+      return response.redirect('back')
+    }
+
+    try {
+      await auth.attempt(email, password);
+      session.flash({ notificationSuccess: 'Logged in successfully.' })
+      return response.redirect('/')
+    }
+    catch (e) {
+      console.log(e)
+      session.flash({ notificationError: 'Failed to log in. Please check your credentials.' })
+      return response.redirect('back')
+    }
+  }
+
+  async register({ view }) {
+    return view.render('users.register', {
+      title: 'Register'
+    })
+  }
+
+  async store({ request, response, session }) {
+    const userData = request.only(['username', 'email', 'password'])
+
+    const messages = {
+      'username.required': 'Please choose a username.',
+      'username.unique': 'Sorry, this username has already been chosen.',
+      'email.required': 'Please enter an email.',
+      'email.email': 'Sorry, this is an invalid email.',
+      'email.unique': 'This email is already registered.',
+      'password.required': 'Please enter a password.',
+      'password_confirmation.required_if': 'Please confirm your password.',
+      'password_confirmation.same': 'Passwords do not match.'
+    }
+
+    const validation = await validate(request.all(), {
+      username: 'required|unique:users',
+      email: 'required|email|unique:users',
+      password: 'required',
+      password_confirmation: 'required_if:password|same:password'
+    }, messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashExcept(['password'])
+      return response.redirect('back')
+    }
+
+    const user = await User.create(userData)
+    session.flash({ notificationSuccess: 'Registered successfully.' })
+    return response.redirect('/')
+  }
+
+  async logout({ auth, response, session }) {
+    try {
+      auth.logout()
+      session.flash({ notificationSuccess: 'Logged out successfully.' })
+      return response.redirect('/')
+    }
+    catch(e) {
+      console.log(e)
+      session.flash({ notificationError: 'Did not log out.' })
+      return response.redirect('back')
+    }
+  }
+
+}
+
+module.exports = UserController

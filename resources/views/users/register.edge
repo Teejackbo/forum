@@ -1,0 +1,28 @@
+@layout('layouts.main')
+
+@section('content')
+  <form action="{{ route('register') }}" method="POST">
+    {{ csrfField() }}
+    <div class="form-field mtb-1">
+      <label for="username" class="pb-1">Username:</label>
+      <input type="text" name="username" placeholder="Please enter your username." value="{{ old('username', '') }}">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('username'), hasErrorFor('username')) }}
+    </div>
+    <div class="form-field mtb-1">
+      <label for="email" class="pb-1">Email:</label>
+      <input type="email" name="email" placeholder="Please enter your email." value="{{ old('email', '') }}">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
+    </div>
+    <div class="form-field mtb-1">
+      <label for="password" class="pb-1">Password:</label>
+      <input type="password" name="password" placeholder="Enter a password.">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
+    </div>
+    <div class="form-field mtb-1">
+      <label for="password" class="pb-1">Password Confirmation:</label>
+      <input type="password" name="password_confirmation" placeholder="Confirm your password.">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('password_confirmation'), hasErrorFor('password_confirmation')) }}
+    </div>
+    <button type="submit" class="btn btn-go">Register!</button>
+  </form>
+@endsection

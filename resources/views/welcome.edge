@@ -1,0 +1,16 @@
+@layout('layouts.main')
+
+@section('content')
+  @if(old('notificationError'))
+    <div class="alert alert-dg mtb-1">
+      {{ old('notificationError') }}
+    </div>
+  @endif
+  @if(old('notificationSuccess'))
+    <div class="alert alert-success mtb-1">
+      {{ old('notificationSuccess') }}
+    </div>
+  @endif
+  <h2 class="ptb-1">Welcome to my forum.</h2>
+  <p>I am making this forum to get a full grasp of AdonisJS, and MVC frameworks in general. This forum will hopefully one day become related to various things, such as web development.</p>
+@endsection

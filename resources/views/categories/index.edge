@@ -1,0 +1,13 @@
+@layout('layouts.main')
+
+@section('content')
+  <h2 class="ptb-1">Categories</h2>
+  <ul>
+    @each(category in categories)
+      <div class="category">
+        <h2>{{ category.title }}</h2>
+        <p>{{ category.description }}</p>
+      </div>
+    @endeach
+  </ul>
+@endsection
