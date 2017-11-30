@@ -1,6 +1,9 @@
 @layout('layouts.main')
 
 @section('content')
+  <a href="{{ route('showCategories') }}">
+    <button class="btn"><< Back</button>
+  </a>
   <h2>{{ category.title }}</h2>
   <p>{{ category.description }}</p>
 @endsection

@@ -4,11 +4,11 @@
   <h2 class="ptb-1">Categories</h2>
   <ul>
     @each(category in categories)
-      <div class="category">
-        <h2>{{ category.title }}</h2>
-        <p>{{ category.description }}</p>
-        <a href="/categories/{{ category.id }}">
-          <button class="btn">Read</button>
+      <div class="category mtb-1 p-1 br-5 u-clear bigger-b-s">
+        <h3 class="text-deep-orange-darken-1">{{ category.title }}</h3>
+        <p class="d-ib ptb-1">{{ category.description }}</p>
+        <a href="/categories/{{ category.id }}" class="u-float-r">
+          <button class="btn btn-large btn-go">Read</button>
         </a>
       </div>
     @endeach
