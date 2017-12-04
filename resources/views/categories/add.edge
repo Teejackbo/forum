@@ -1,0 +1,19 @@
+@layout('layouts.main')
+
+@section('content')
+  <h2 class="mt-1">Add Category</h2>
+  <form action="{{ route('storeCategory') }}" method="post">
+    {{ csrfField() }}
+    <div class="form-field mtb-1">
+      <label for="title" class="mb-1">Title</label>
+      <input type="text" name="title" placeholder="Enter the name of the category." value="{{ old('title', '') }}">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
+    </div>
+    <div class="form-field mtb-1">
+      <label for="description" class="mb-1">Description</label>
+      <textarea name="description" placeholder="Enter a short description of the category.">{{ old('description', '') }}</textarea>
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+    </div>
+    <button type="submit" class="btn btn-go">Submit</button>
+  </form>
+@endsection

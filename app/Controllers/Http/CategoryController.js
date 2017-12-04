@@ -1,6 +1,7 @@
 'use strict'
 
 const Category = use('App/Models/Category')
+const { validate } = use('Validator')
 
 class CategoryController {
   async index({ view }) {
@@ -21,6 +22,37 @@ class CategoryController {
       category: category.toJSON(),
       posts: posts.toJSON()
     })
+  }
+
+  async add({ view }) {
+    return view.render('categories.add', {
+      title: 'Add Category'
+    })
+  }
+
+  async store({ view, request, response, session }) {
+    const messages = {
+      'title.required': 'Please enter a title.',
+      'description.required': 'Please enter a description.'
+    }
+
+    const validation = await validate(request.all(), {
+      title: 'required',
+      description: 'required'
+    }, messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashAll()
+      return response.redirect('back')
+    }
+    session.flash({ notification: 'Category added.' })
+    const category = new Category()
+    category.title = request.input('title')
+    category.description = request.input('description')
+    await category.save()
+    return response.redirect('/categories')
   }
 }
 
