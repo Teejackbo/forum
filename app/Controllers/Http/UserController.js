@@ -47,8 +47,6 @@ class UserController {
   }
 
   async store({ request, response, session }) {
-    const userData = request.only(['username', 'email', 'password'])
-
     const messages = {
       'username.required': 'Please choose a username.',
       'username.unique': 'Sorry, this username has already been chosen.',
@@ -59,22 +57,27 @@ class UserController {
       'password_confirmation.required_if': 'Please confirm your password.',
       'password_confirmation.same': 'Passwords do not match.'
     }
-
+    
     const validation = await validate(request.all(), {
       username: 'required|unique:users',
       email: 'required|email|unique:users',
       password: 'required',
       password_confirmation: 'required_if:password|same:password'
     }, messages)
-
+    
     if (validation.fails()) {
       session
-        .withErrors(validation.messages())
-        .flashExcept(['password'])
+      .withErrors(validation.messages())
+      .flashExcept(['password'])
       return response.redirect('back')
     }
-
-    const user = await User.create(userData)
+    
+    const user = new User()
+    user.username = request.input('username')
+    user.email = request.input('email')
+    user.password = request.input('password')
+    user.permissions = 1
+    await user.save()
     session.flash({ notificationSuccess: 'Registered successfully.' })
     return response.redirect('/')
   }
