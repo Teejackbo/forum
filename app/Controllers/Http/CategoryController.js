@@ -24,9 +24,20 @@ class CategoryController {
     })
   }
 
-  async add({ view }) {
-    return view.render('categories.add', {
-      title: 'Add Category'
+  async add({ view, auth, response }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permissions >= 3) {
+        return view.render('categories.add', {
+          title: 'Add Category'
+        })
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+    return view.render('errors.permission', {
+      title: 'You do not have permission to view this page.'
     })
   }
 
