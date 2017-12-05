@@ -24,7 +24,7 @@ class CategoryController {
     })
   }
 
-  async add({ view, auth, response }) {
+  async add({ view, auth, response }) { 
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
@@ -77,6 +77,27 @@ class CategoryController {
     category.description = request.input('description')
     await category.save()
     return response.redirect('/categories')
+  }
+
+  async manage({ view, auth }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permissions <= 2) {
+        return view.render('errors.permission', {
+          title: 'You do not have permission to view this page.'
+        })
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+
+    const categories = await Category.all()
+
+    return view.render('categories.manage', {
+      title: 'Manage Categories',
+      categories: categories.toJSON()
+    })
   }
 }
 

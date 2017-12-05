@@ -34,6 +34,11 @@ Route
   .as('storeCategory')
 
 Route
+  .get('categories/manage', 'CategoryController.manage')
+  .middleware('auth')
+  .as('manageCategories')
+
+Route
   .get('/categories/:id', 'CategoryController.view')
   .as('viewCategory')
 
