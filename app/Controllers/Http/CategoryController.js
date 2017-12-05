@@ -27,21 +27,34 @@ class CategoryController {
   async add({ view, auth, response }) {
     try {
       await auth.getUser()
-      if (auth.user.permissions >= 3) {
-        return view.render('categories.add', {
-          title: 'Add Category'
+      if (auth.user.permissions <= 2) {
+        return view.render('errors.permission', {
+          title: 'You do not have permission to view this page.'
         })
       }
     }
     catch (err) {
       console.log(err)
     }
-    return view.render('errors.permission', {
-      title: 'You do not have permission to view this page.'
+
+    return view.render('categories.add', {
+      title: 'Add a category.'
     })
   }
 
-  async store({ view, request, response, session }) {
+  async store({ view, request, response, session, auth }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permissions <= 2) {
+        return view.render('errors.permission', {
+          title: 'You do not have permission to view this page.'
+        })
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+
     const messages = {
       'title.required': 'Please enter a title.',
       'description.required': 'Please enter a description.'
