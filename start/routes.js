@@ -39,6 +39,10 @@ Route
   .as('manageCategories')
 
 Route
+  .delete('/categories/:id', 'CategoryController.destroy')
+  .middleware('auth')
+
+Route
   .get('/categories/:id', 'CategoryController.view')
   .as('viewCategory')
 

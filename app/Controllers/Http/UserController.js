@@ -33,8 +33,8 @@ class UserController {
       session.flash({ notificationSuccess: 'Logged in successfully.' })
       return response.redirect('/')
     }
-    catch (e) {
-      console.log(e)
+    catch (err) {
+      console.log(err)
       session.flash({ notificationError: 'Failed to log in. Please check your credentials.' })
       return response.redirect('back')
     }

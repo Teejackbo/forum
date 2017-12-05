@@ -24,7 +24,7 @@ class CategoryController {
     })
   }
 
-  async add({ view, auth, response }) { 
+  async add({ view, auth, response }) {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
@@ -71,7 +71,7 @@ class CategoryController {
         .flashAll()
       return response.redirect('back')
     }
-    session.flash({ notification: 'Category added.' })
+    session.flash({ notificationSuccess: 'Category added.' })
     const category = new Category()
     category.title = request.input('title')
     category.description = request.input('description')
@@ -98,6 +98,26 @@ class CategoryController {
       title: 'Manage Categories',
       categories: categories.toJSON()
     })
+  }
+
+  async destroy({ request, response, view, auth, session }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permission <= 2) {
+        return view.render('errors.permission', {
+          title: 'You do not have permission to view this page.'
+        })
+      }
+      const category = await Category.find(request.params.id)
+      await category.delete()
+      session.flash({ notificationSuccess: 'Category deleted. ' })
+      return response.redirect('/categories')
+    }
+    catch (err) {
+      console.log(err)
+      session.flash({ notificationError: 'Failed to delete category.' })
+      return response.redirect('/categories')
+    }
   }
 }
 

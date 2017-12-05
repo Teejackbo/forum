@@ -2,15 +2,29 @@
 
 @section('content')
   <h2 class="ptb-1">Categories</h2>
+  @if(old('notificationSuccess'))
+    <div class="alert alert-success mb-1">
+      {{ old('notificationSuccess') }}
+    </div>
+  @endif
+  @if(old('notificationError'))
+    <div class="alert alert-dg mb-1">
+      {{ old('notificationError') }}
+    </div>
+  @endif
   <ul>
-    @each(category in categories)
-      <div class="category mtb-1 p-1 br-5 u-clear bigger-b-s">
-        <h3 class="text-deep-orange-darken-1">{{ category.title }}</h3>
-        <p class="d-ib ptb-1">{{ category.description }}</p>
-        <a href="/categories/{{ category.id }}" class="u-float-r">
-          <button class="btn btn-large btn-go">Read</button>
-        </a>
-      </div>
-    @endeach
+    @if(categories[0])
+      @each(category in categories)
+        <div class="category mtb-1 p-1 br-5 u-clear bigger-b-s">
+          <h3 class="text-deep-orange-darken-1">{{ category.title }}</h3>
+          <p class="d-ib ptb-1">{{ category.description }}</p>
+          <a href="/categories/{{ category.id }}" class="u-float-r">
+            <button class="btn btn-large btn-go">Read</button>
+          </a>
+        </div>
+      @endeach
+    @else
+      <h2>No categories exist.</h2>
+    @endif
   </ul>
 @endsection
