@@ -1,6 +1,9 @@
 @layout('layouts.main')
 
 @section('content')
+  <a href="/categories/manage/add">
+    <button class="btn mtb-2">Add Category</button>
+  </a>
   @if(categories[0])
     @each(category in categories)
       <div class="category mtb-1 p-1 br-5 u-clear bigger-b-s">
@@ -12,5 +15,7 @@
         </form>
       </div>
     @endeach
+  @else
+    <h2>No categories to manage.</h2>
   @endif
 @endsection

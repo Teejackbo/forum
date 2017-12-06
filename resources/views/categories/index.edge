@@ -2,16 +2,25 @@
 
 @section('content')
   <h2 class="ptb-1">Categories</h2>
+  
   @if(old('notificationSuccess'))
     <div class="alert alert-success mb-1">
       {{ old('notificationSuccess') }}
     </div>
   @endif
+  
   @if(old('notificationError'))
     <div class="alert alert-dg mb-1">
       {{ old('notificationError') }}
     </div>
   @endif
+  
+  @if(auth.user.permissions >= 3)
+    <a href="/categories/manage">
+      <button class="btn mb-2">Manage Categories</button>
+    </a>
+  @endif
+  
   <ul>
     @if(categories[0])
       @each(category in categories)

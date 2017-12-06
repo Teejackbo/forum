@@ -79,7 +79,7 @@ class CategoryController {
     return response.redirect('/categories')
   }
 
-  async manage({ view, auth }) {
+  async manage({ view, auth, response }) {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
@@ -90,6 +90,7 @@ class CategoryController {
     }
     catch (err) {
       console.log(err)
+      return response.redirect('back')
     }
 
     const categories = await Category.all()
