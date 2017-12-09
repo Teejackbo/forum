@@ -1351,14 +1351,13 @@ table {
 .mr-1 {
   margin-right: 1em; }
 
-.mr-1 {
-  margin-right: 1em; }
-
 .mtb-1 {
-  margin: 1em 0; }
+  margin-top: 1em;
+  margin-bottom: 1em; }
 
 .mlr-1 {
-  margin: 0 1; }
+  margin-left: 1em;
+  margin-right: 1em; }
 
 .p-1 {
   padding: 1em; }
@@ -1375,14 +1374,13 @@ table {
 .pr-1 {
   padding-right: 1em; }
 
-.pr-1 {
-  padding-right: 1em; }
-
 .ptb-1 {
-  padding: 1em 0; }
+  padding-top: 1em;
+  padding-bottom: 1em; }
 
 .plr-1 {
-  padding: 0 1; }
+  padding-left: 1em;
+  padding-right: 1em; }
 
 .br-1 {
   border-radius: 1px; }
@@ -1402,14 +1400,13 @@ table {
 .mr-2 {
   margin-right: 2em; }
 
-.mr-2 {
-  margin-right: 2em; }
-
 .mtb-2 {
-  margin: 2em 0; }
+  margin-top: 2em;
+  margin-bottom: 2em; }
 
 .mlr-2 {
-  margin: 0 2; }
+  margin-left: 2em;
+  margin-right: 2em; }
 
 .p-2 {
   padding: 2em; }
@@ -1426,14 +1423,13 @@ table {
 .pr-2 {
   padding-right: 2em; }
 
-.pr-2 {
-  padding-right: 2em; }
-
 .ptb-2 {
-  padding: 2em 0; }
+  padding-top: 2em;
+  padding-bottom: 2em; }
 
 .plr-2 {
-  padding: 0 2; }
+  padding-left: 2em;
+  padding-right: 2em; }
 
 .br-2 {
   border-radius: 2px; }
@@ -1453,14 +1449,13 @@ table {
 .mr-3 {
   margin-right: 3em; }
 
-.mr-3 {
-  margin-right: 3em; }
-
 .mtb-3 {
-  margin: 3em 0; }
+  margin-top: 3em;
+  margin-bottom: 3em; }
 
 .mlr-3 {
-  margin: 0 3; }
+  margin-left: 3em;
+  margin-right: 3em; }
 
 .p-3 {
   padding: 3em; }
@@ -1477,14 +1472,13 @@ table {
 .pr-3 {
   padding-right: 3em; }
 
-.pr-3 {
-  padding-right: 3em; }
-
 .ptb-3 {
-  padding: 3em 0; }
+  padding-top: 3em;
+  padding-bottom: 3em; }
 
 .plr-3 {
-  padding: 0 3; }
+  padding-left: 3em;
+  padding-right: 3em; }
 
 .br-3 {
   border-radius: 3px; }
@@ -1504,14 +1498,13 @@ table {
 .mr-4 {
   margin-right: 4em; }
 
-.mr-4 {
-  margin-right: 4em; }
-
 .mtb-4 {
-  margin: 4em 0; }
+  margin-top: 4em;
+  margin-bottom: 4em; }
 
 .mlr-4 {
-  margin: 0 4; }
+  margin-left: 4em;
+  margin-right: 4em; }
 
 .p-4 {
   padding: 4em; }
@@ -1528,14 +1521,13 @@ table {
 .pr-4 {
   padding-right: 4em; }
 
-.pr-4 {
-  padding-right: 4em; }
-
 .ptb-4 {
-  padding: 4em 0; }
+  padding-top: 4em;
+  padding-bottom: 4em; }
 
 .plr-4 {
-  padding: 0 4; }
+  padding-left: 4em;
+  padding-right: 4em; }
 
 .br-4 {
   border-radius: 4px; }
@@ -1555,14 +1547,13 @@ table {
 .mr-5 {
   margin-right: 5em; }
 
-.mr-5 {
-  margin-right: 5em; }
-
 .mtb-5 {
-  margin: 5em 0; }
+  margin-top: 5em;
+  margin-bottom: 5em; }
 
 .mlr-5 {
-  margin: 0 5; }
+  margin-left: 5em;
+  margin-right: 5em; }
 
 .p-5 {
   padding: 5em; }
@@ -1579,14 +1570,13 @@ table {
 .pr-5 {
   padding-right: 5em; }
 
-.pr-5 {
-  padding-right: 5em; }
-
 .ptb-5 {
-  padding: 5em 0; }
+  padding-top: 5em;
+  padding-bottom: 5em; }
 
 .plr-5 {
-  padding: 0 5; }
+  padding-left: 5em;
+  padding-right: 5em; }
 
 .br-5 {
   border-radius: 5px; }
@@ -1659,7 +1649,6 @@ p, .text-para {
 a, .text-link {
   font-family: Raleway;
   font-weight: bold;
-  font-size: 0.9em;
   text-decoration: none; }
 
 label {

@@ -39,7 +39,15 @@ Route
   .as('manageCategories')
 
 Route
+  .get('categories/manage/:id', 'CategoryController.edit')
+  .middleware('auth')
+
+Route
   .delete('/categories/:id', 'CategoryController.destroy')
+  .middleware('auth')
+
+Route
+  .put('/categories/:id', 'CategoryController.update')
   .middleware('auth')
 
 Route

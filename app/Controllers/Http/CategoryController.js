@@ -68,12 +68,12 @@ class CategoryController {
         .flashAll()
       return response.redirect('back')
     }
-    session.flash({ notificationSuccess: 'Category added.' })
     const category = new Category()
     category.title = request.input('title')
     category.description = request.input('description')
     await category.save()
-    return response.redirect('/categories')
+    session.flash({ notificationSuccess: 'Category added.' })
+    return response.redirect('/categories/manage')
   }
 
   async manage({ view, auth, response }) {
@@ -104,14 +104,77 @@ class CategoryController {
       }
       const category = await Category.find(request.params.id)
       await category.delete()
-      session.flash({ notificationSuccess: 'Category deleted. ' })
-      return response.redirect('/categories')
+      session.flash({ notificationSuccess: 'Category deleted.' })
+      return response.redirect('/categories/manage')
     }
     catch (err) {
       console.log(err)
       session.flash({ notificationError: 'Failed to delete category.' })
       return response.redirect('/categories')
     }
+  }
+
+  async edit({ request, response, view, auth, session }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permissions <= 2) {
+        return response.redirect('/404')
+      }
+    }
+    catch (e) {
+      console.log(e)
+      return response.redirect('/404')
+    }
+    try {
+      const category = await Category.find(request.params.id)
+      return view.render('categories.edit', {
+        title: 'Edit Category',
+        category: category.toJSON()
+      })
+    }
+    catch (e) {
+      session.flash({ notificationError: 'Could not find this category.' })
+      return view.render('categories.manage')
+    }
+  }
+
+  async update({ request, response, view, auth, session }) {
+    try {
+      await auth.getUser()
+      if (auth.user.permissions <= 2) {
+        return response.redirect('/404')
+      }
+    }
+    catch (e) {
+      return response.redirect('/404')
+    }
+
+    const messages = {
+      'title.required': 'Please enter a title.',
+      'description.required': 'Please enter a description.'
+    }
+
+    const validation = await validate(request.all(), {
+      title: 'required',
+      description: 'required'
+    }, messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashAll()
+      return response.redirect('back')
+    }
+
+    const category = await Category.find(request.params.id)
+    category.title = request.input('title')
+    category.description = request.input('description')
+
+    await category.save()
+
+    session.flash({ notificationSuccess: 'Edited category.' })
+
+    return response.redirect('/categories/manage')
   }
 }
 

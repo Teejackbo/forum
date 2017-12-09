@@ -1,20 +1,24 @@
 @layout('layouts.main')
 
 @section('content')
-  <h2 class="mtb-1">Add Category</h2>
-  <a href="/categories/manage">
+  <h2 class="mtb-1">Edit Category</h2>
+  <a href="/categories/manage" class="mtb-1 mr-1">
     <button class="btn"><< Back</button>
   </a>
-  <form action="{{ route('storeCategory') }}" method="post">
+  <form action="/categories/{{ category.id }}?_method=DELETE" method="post" class="d-ib">
+    {{ csrfField() }}
+    <button type="submit" class="btn btn-dg">Delete Category</button>
+  </form>
+  <form action="/categories/{{ category.id }}?_method=PUT" method="POST">
     {{ csrfField() }}
     <div class="form-field mtb-1">
       <label for="title" class="mb-1">Title</label>
-      <input type="text" name="title" placeholder="Enter the name of the category." value="{{ old('title', '') }}">
+      <input type="text" placeholder="Edit the title." name="title" value="{{ category.title }}">
       {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
     </div>
     <div class="form-field mtb-1">
       <label for="description" class="mb-1">Description</label>
-      <textarea name="description" placeholder="Enter a short description of the category.">{{ old('description', '') }}</textarea>
+      <textarea name="description" placeholder="Edit the description." name="description">{{ category.description }}</textarea>
       {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
     </div>
     <button type="submit" class="btn btn-go">Submit</button>
