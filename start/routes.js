@@ -32,12 +32,12 @@ Route
   .post('categories/manage/add', 'CategoryController.store')
   .middleware('auth')
   .as('storeCategory')
-  
-  Route
+
+Route
   .get('categories/manage', 'CategoryController.manage')
   .middleware('auth')
   .as('manageCategories')
-  
+
 Route
   .delete('/categories/:id', 'CategoryController.destroy')
   .middleware('auth')
@@ -66,4 +66,6 @@ Route
   .get('logout', 'UserController.logout')
   .as('logout')
 
-  Route.any('*', ({ view }) => view.render('errors.404', { title: '404 Error' }))
+Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
+
+Route.any('*', ({ response }) => response.redirect('/404'))

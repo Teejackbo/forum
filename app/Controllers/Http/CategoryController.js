@@ -28,9 +28,7 @@ class CategoryController {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
-        return view.render('errors.permission', {
-          title: 'You do not have permission to view this page.'
-        })
+        return response.redirect('/404')
       }
     }
     catch (err) {
@@ -46,13 +44,12 @@ class CategoryController {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
-        return view.render('errors.permission', {
-          title: 'You do not have permission to view this page.'
-        })
+        return response.redirect('/404')
       }
     }
     catch (err) {
       console.log(err)
+      return response.redirect('/404')
     }
 
     const messages = {
@@ -83,14 +80,12 @@ class CategoryController {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
-        return view.render('errors.permission', {
-          title: 'You do not have permission to view this page.'
-        })
+        return response.redirect('/404')
       }
     }
     catch (err) {
       console.log(err)
-      return response.redirect('back')
+      return response.redirect('/404')
     }
 
     const categories = await Category.all()
@@ -105,9 +100,7 @@ class CategoryController {
     try {
       await auth.getUser()
       if (auth.user.permission <= 2) {
-        return view.render('errors.permission', {
-          title: 'You do not have permission to view this page.'
-        })
+        return response.redirect('/404')
       }
       const category = await Category.find(request.params.id)
       await category.delete()
