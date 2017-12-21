@@ -96,13 +96,13 @@ class CategoryController {
     })
   }
 
-  async destroy({ request, response, view, auth, session }) {
+  async destroy({ request, response, view, auth, session, params }) {
     try {
       await auth.getUser()
       if (auth.user.permission <= 2) {
         return response.redirect('/404')
       }
-      const category = await Category.find(request.params.id)
+      const category = await Category.find(params.id)
       await category.delete()
       session.flash({ notificationSuccess: 'Category deleted.' })
       return response.redirect('/categories/manage')
@@ -114,7 +114,7 @@ class CategoryController {
     }
   }
 
-  async edit({ request, response, view, auth, session }) {
+  async edit({ request, response, view, auth, session, params }) {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
@@ -126,7 +126,7 @@ class CategoryController {
       return response.redirect('/404')
     }
     try {
-      const category = await Category.find(request.params.id)
+      const category = await Category.find(params.id)
       return view.render('categories.edit', {
         title: 'Edit Category',
         category: category.toJSON()
@@ -138,7 +138,7 @@ class CategoryController {
     }
   }
 
-  async update({ request, response, view, auth, session }) {
+  async update({ request, response, view, auth, session, params }) {
     try {
       await auth.getUser()
       if (auth.user.permissions <= 2) {
@@ -166,7 +166,7 @@ class CategoryController {
       return response.redirect('back')
     }
 
-    const category = await Category.find(request.params.id)
+    const category = await Category.find(params.id)
     category.title = request.input('title')
     category.description = request.input('description')
 
