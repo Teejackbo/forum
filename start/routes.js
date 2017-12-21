@@ -19,6 +19,11 @@ Route.on('/').render('welcome', {
   title: "Jack's Forum"
 })
 
+/*
+  TODO:
+    Refactor categories to use a route resource rather than a load of separate routes.
+*/
+
 Route
   .get('categories', 'CategoryController.index')
   .as('showCategories')

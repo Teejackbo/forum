@@ -2,6 +2,10 @@
 
 const Category = use('App/Models/Category')
 const { validate } = use('Validator')
+/*
+TODO:
+  Refactor this controller to use a route resource.
+*/
 
 class CategoryController {
   async index({ view }) {
