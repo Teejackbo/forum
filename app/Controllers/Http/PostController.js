@@ -57,6 +57,14 @@ class PostController {
     return response.redirect(`/posts`)
   }
 
+  async show({ view, params }) {
+    const post = await Post.find(params.id)
+    return view.render('posts.show', {
+      title: post.title,
+      post: post.toJSON()
+    })
+  }
+
 }
 
 module.exports = PostController
