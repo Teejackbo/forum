@@ -2,8 +2,12 @@
 
 @section('content')
   <h2>Posts</h2>
-  @each(post in posts)
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.description }}</p>
-  @endeach
+  @if(posts[0])
+    @each(post in posts)
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.description }}</p>
+    @endeach
+  @else
+    <h2>Looks like there aren't any posts. Why don't you make the first one <a href="/posts/create">here</a>?</h2>
+  @endif
 @endsection

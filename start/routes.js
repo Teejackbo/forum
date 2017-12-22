@@ -80,6 +80,11 @@ Route
   .as('logout')
 
 Route.resource('posts', 'PostController')
+  .middleware('auth')
+  .except(['index', 'show'])
+
+Route.get('/posts', 'PostController.index')
+Route.get('/posts/:id', 'PostController.show')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 

@@ -3,8 +3,12 @@
 const Model = use('Model')
 
 class Post extends Model {
-  category () {
+  category() {
     return this.hasOne('App/Models/Category')
+  }
+
+  user() {
+    return this.hasOne('App/Models/User')
   }
 }
 
