@@ -1,27 +1,32 @@
 @layout('layouts.main')
 
 @section('content')
-  <form action="/posts" method="post">
+  <form action="/posts" method=post>
+    {{ csrfField() }}
     <div class="form-field mtb-1">
       <label for="title">Title</label>
-      <input type="text" name="title" required>
+      <input type="text" name="title" value="{{ old('title', '') }}" placeholder="Enter a title for your post.">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
     </div>
     <div class="form-field mtb-1">
       <label for="description">Description</label>
-      <input type="text" name="description" required>
+      <input type="text" name="description" value="{{ old('description', '') }}" placeholder="Give a brief description of your post.">
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
     </div>
     <div class="form-field mtb-1">
       <label for="body">Body</label>
-      <input type="text" name="body" required>
+      <textarea name="body" placeholder="Write your post.">{{ old('body', '') }}</textarea>
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('body'), hasErrorFor('body')) }}
     </div>
     <div class="form-field mtb-1">
       <label for="category">Category</label>
-      <select name="category" required>
+      <select name="category">
         <option value="" disabled selected>Choose a category.</option>
         @each(category in categories)
           <option value="{{ category.id }}">{{ category.title }}</option>
         @endeach
       </select>
+      {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('category'), hasErrorFor('category')) }}
     </div>
     <button type="submit" class="btn btn-go">Submit</button>
   </form>

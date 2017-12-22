@@ -1,6 +1,6 @@
 # Node modules
 node_modules
-
+.vscode
 # Adonis directory for storing tmp files
 tmp
 
@@ -17,5 +17,5 @@ database/development.sqlite
 design
 
 .sassc
-
+.sass-cache
 .css.map

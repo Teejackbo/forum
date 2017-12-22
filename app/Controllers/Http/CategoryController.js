@@ -37,7 +37,7 @@ class CategoryController {
     })
   }
 
-  async store({ view, request, response, session, auth }) {
+  async store({ request, response, session, auth }) {
     checkPerm(auth.user.permissions, 2, response)
 
     const messages = {
