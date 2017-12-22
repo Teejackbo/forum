@@ -15,3 +15,7 @@ yarn.lock
 database/development.sqlite
 
 design
+
+.sassc
+
+.css.map
