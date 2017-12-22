@@ -80,12 +80,12 @@ Route
   .as('logout')
 
 Route.resource('posts', 'PostController')
-  .middleware('auth')
   .except(['index', 'show'])
+  .middleware('auth')
 
 Route.get('/posts', 'PostController.index')
 Route.get('/posts/:id', 'PostController.show')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
-
+Route.get('/permission', ({ view }) => view.render('errors.permission', { title: 'You do not have permission to view this page.' }))
 Route.any('*', ({ response }) => response.redirect('/404'))

@@ -9,5 +9,10 @@ module.exports = {
       return response.redirect('/404');
       console.log(e)
     }
+  },
+  checkUser: function (id, reqId, response) {
+    if (id != reqId) {
+      return response.redirect('/permission')
+    }
   }
 }

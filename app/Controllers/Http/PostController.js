@@ -2,8 +2,9 @@
 
 const Post = use('App/Models/Post')
 const Category = use('App/Models/Category')
+const User = use('App/Models/User')
 const { validate } = use('Validator')
-const { checkPerm } = use('App/Models/Helpers/UserHelper')
+const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 
 class PostController {
 
@@ -54,7 +55,7 @@ class PostController {
     post.category_id = request.input('category')
     await post.save()
     session.flash({ notificationSuccess: 'Successfully created your post.' })
-    return response.redirect(`/posts`)
+    return response.redirect(`/posts/${post.id}`)
   }
 
   async show({ view, params, response }) {
@@ -68,7 +69,14 @@ class PostController {
     })
   }
 
-
+  async edit({ view, params, response, auth }) {
+    const post = await Post.find(params.id)
+    checkUser(auth.user.id, post.user_id, response)
+    return view.render('posts.edit', {
+      title: `Edit Post: ${post.title}`,
+      post: post.toJSON()
+    })
+  }
 
 }
 
