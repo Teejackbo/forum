@@ -48,6 +48,7 @@ class PostController {
       session.withErrors(validation.messages()).flashAll()
       return response.redirect('back')
     }
+
     const post = new Post()
     post.title = request.input('title')
     post.description = request.input('description')
@@ -78,7 +79,29 @@ class PostController {
     })
   }
 
-  async update({ request, response, params, auth }) {
+  async update({ request, response, params, auth, session }) {
+
+    const messages = {
+      'title.required': 'Please enter a title.',
+      'title.min': 'Title must be a minimum of 5 characters.',
+      'title.max': 'Title must be no more than 30 characters.',
+      'description.required': 'Please enter a description.',
+      'description.min': 'Description must be at least 20 characters.',
+      'body.required': 'Please enter content.',
+      'body.min': 'Please make sure your content is at least 10 characters.'
+    }
+
+    const validation = await validate(request.all(), {
+      title: 'required|min:5|max:30',
+      description: 'required|min:20',
+      body: 'required|min:10'
+    }, messages)
+
+    if (validation.fails()) {
+      session.withErrors(validation.messages()).flashAll()
+      return response.redirect('back')
+    }
+
     const post = await Post.find(params.id)
     checkUser(auth.user.id, post.user_id, response)
     post.title = request.input('title')
