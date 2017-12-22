@@ -78,6 +78,16 @@ class PostController {
     })
   }
 
+  async update({ request, response, params, auth }) {
+    const post = await Post.find(params.id)
+    checkUser(auth.user.id, post.user_id, response)
+    post.title = request.input('title')
+    post.description = request.input('description')
+    post.body = request.input('body')
+    await post.save()
+    return response.redirect(`/posts/${post.id}`)
+  }
+
 }
 
 module.exports = PostController
