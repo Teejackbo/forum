@@ -79,6 +79,8 @@ Route
   .get('logout', 'UserController.logout')
   .as('logout')
 
+Route.resource('posts', 'PostController')
+
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 
 Route.any('*', ({ response }) => response.redirect('/404'))

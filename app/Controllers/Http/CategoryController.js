@@ -2,6 +2,7 @@
 
 const Category = use('App/Models/Category')
 const { validate } = use('Validator')
+const { checkPerm } = use('App/Models/Helpers/UserHelper')
 /*
 TODO:
   Refactor this controller to use a route resource.
@@ -29,15 +30,7 @@ class CategoryController {
   }
 
   async add({ view, auth, response }) {
-    try {
-      await auth.getUser()
-      if (auth.user.permissions <= 2) {
-        return response.redirect('/404')
-      }
-    }
-    catch (err) {
-      console.log(err)
-    }
+    checkPerm(auth.user.permissions, 2, response)
 
     return view.render('categories.add', {
       title: 'Add a category.'
@@ -45,16 +38,7 @@ class CategoryController {
   }
 
   async store({ view, request, response, session, auth }) {
-    try {
-      await auth.getUser()
-      if (auth.user.permissions <= 2) {
-        return response.redirect('/404')
-      }
-    }
-    catch (err) {
-      console.log(err)
-      return response.redirect('/404')
-    }
+    checkPerm(auth.user.permissions, 2, response)
 
     const messages = {
       'title.required': 'Please enter a title.',
@@ -81,16 +65,7 @@ class CategoryController {
   }
 
   async manage({ view, auth, response }) {
-    try {
-      await auth.getUser()
-      if (auth.user.permissions <= 2) {
-        return response.redirect('/404')
-      }
-    }
-    catch (err) {
-      console.log(err)
-      return response.redirect('/404')
-    }
+    checkPerm(auth.user.permissions, 2, response)
 
     const categories = await Category.all()
 
@@ -101,34 +76,22 @@ class CategoryController {
   }
 
   async destroy({ request, response, view, auth, session, params }) {
+    checkPerm(auth.user.permissions, 2, response)
     try {
-      await auth.getUser()
-      if (auth.user.permission <= 2) {
-        return response.redirect('/404')
-      }
       const category = await Category.find(params.id)
       await category.delete()
       session.flash({ notificationSuccess: 'Category deleted.' })
       return response.redirect('/categories/manage')
     }
-    catch (err) {
-      console.log(err)
+    catch (e) {
+      console.log(e)
       session.flash({ notificationError: 'Failed to delete category.' })
       return response.redirect('/categories')
     }
   }
 
   async edit({ request, response, view, auth, session, params }) {
-    try {
-      await auth.getUser()
-      if (auth.user.permissions <= 2) {
-        return response.redirect('/404')
-      }
-    }
-    catch (e) {
-      console.log(e)
-      return response.redirect('/404')
-    }
+    checkPerm(auth.user.permissions, 2, response)
     try {
       const category = await Category.find(params.id)
       return view.render('categories.edit', {
@@ -143,15 +106,7 @@ class CategoryController {
   }
 
   async update({ request, response, view, auth, session, params }) {
-    try {
-      await auth.getUser()
-      if (auth.user.permissions <= 2) {
-        return response.redirect('/404')
-      }
-    }
-    catch (e) {
-      return response.redirect('/404')
-    }
+    checkPerm(auth.user.permissions, 2, response)
 
     const messages = {
       'title.required': 'Please enter a title.',

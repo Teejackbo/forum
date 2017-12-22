@@ -1,11 +1,11 @@
 {
-  "name": "adonis-fullstack-app",
+  "name": "forum",
   "version": "4.0.0",
   "adonis-version": "4.0.0",
   "description": "The fullstack application boilerplate for Adonisjs",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon",
     "test": "node ace test"
   },
   "keywords": [
