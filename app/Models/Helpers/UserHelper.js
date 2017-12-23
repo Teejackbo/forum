@@ -10,8 +10,8 @@ module.exports = {
       console.log(e)
     }
   },
-  checkUser: function (user, reqId, response) {
-    if (user.permissions > 2) {
+  checkUser: function (user, reqId, response, permOverride) {
+    if (user.permissions >= permOverride) {
       return
     }
     if (user.id != reqId) {
