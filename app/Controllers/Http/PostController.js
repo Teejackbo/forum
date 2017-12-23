@@ -6,6 +6,11 @@ const User = use('App/Models/User')
 const { validate } = use('Validator')
 const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 
+/**
+ TODO:
+  Make category of post editable.
+*/
+
 class PostController {
 
   async index({ view }) {
@@ -54,6 +59,7 @@ class PostController {
     post.description = request.input('description')
     post.body = request.input('body')
     post.category_id = request.input('category')
+    post.user_id = auth.user.id
     await post.save()
     session.flash({ notificationSuccess: 'Successfully created your post.' })
     return response.redirect(`/posts/${post.id}`)
@@ -72,10 +78,18 @@ class PostController {
 
   async edit({ view, params, response, auth }) {
     const post = await Post.find(params.id)
-    checkUser(auth.user.id, post.user_id, response)
+    const user = await User.find(post.user_id)
+    const selectedCategory = await Category.find(post.category_id)
+    const categories = await Category.all()
+
+    checkUser(auth.user, post.user_id, response)
+    checkPerm(auth.user.id, 1, response)
     return view.render('posts.edit', {
       title: `Edit Post: ${post.title}`,
-      post: post.toJSON()
+      post: post.toJSON(),
+      user: user.toJSON(),
+      categories: categories.toJSON(),
+      selectedCategory: selectedCategory.toJSON()
     })
   }
 
@@ -88,13 +102,15 @@ class PostController {
       'description.required': 'Please enter a description.',
       'description.min': 'Description must be at least 20 characters.',
       'body.required': 'Please enter content.',
-      'body.min': 'Please make sure your content is at least 10 characters.'
+      'body.min': 'Please make sure your content is at least 10 characters.',
+      'category.required': 'Please select a category.'
     }
 
     const validation = await validate(request.all(), {
       title: 'required|min:5|max:30',
       description: 'required|min:20',
-      body: 'required|min:10'
+      body: 'required|min:10',
+      category: 'required'
     }, messages)
 
     if (validation.fails()) {
@@ -103,10 +119,12 @@ class PostController {
     }
 
     const post = await Post.find(params.id)
-    checkUser(auth.user.id, post.user_id, response)
+    checkUser(auth.user, post.user_id, response)
+    checkPerm(auth.user.id, 1, response)
     post.title = request.input('title')
     post.description = request.input('description')
     post.body = request.input('body')
+    post.category_id = request.input('category')
     await post.save()
     return response.redirect(`/posts/${post.id}`)
   }

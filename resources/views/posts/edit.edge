@@ -2,6 +2,9 @@
 
 @section('content')
   <h2 class="mt-1">Edit Post: {{ post.title }}</h2>
+  @if(auth.user.permissions >= 3)
+    <h3>Post made by: {{ user.username }}</h3>
+  @endif
   <form action="/posts/{{ post.id }}?_method=PUT" method="post">
     {{ csrfField() }}
     <div class="form-field mtb-1">
@@ -19,6 +22,16 @@
       <textarea name="body">{{ post.body }}</textarea>
       {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('body'), hasErrorFor('body')) }}
     </div>
+    <div class="form-field mtb-1">
+      <label for="category">Category</label>
+      <select name="category">
+        <option value="{{ post.category_id }}" disabled selected>{{ selectedCategory.title }}</option>
+        @each(category in categories)
+          <option value="{{ category.id }}">{{ category.title }}</option>
+        @endeach
+      </select>
+    </div>
+    {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('category'), hasErrorFor('category')) }}
     <button type="submit" class="btn btn-go">Save</button>
   </form>
 @endsection

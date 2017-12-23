@@ -1,7 +1,7 @@
 module.exports = {
   checkPerm: function (perm, reqPerm, response) {
     try {
-      if (perm <= reqPerm) {
+      if (perm < reqPerm) {
         return response.redirect('/404')
       }
     }
@@ -10,8 +10,11 @@ module.exports = {
       console.log(e)
     }
   },
-  checkUser: function (id, reqId, response) {
-    if (id != reqId) {
+  checkUser: function (user, reqId, response) {
+    if (user.permissions > 2) {
+      return
+    }
+    if (user.id != reqId) {
       return response.redirect('/permission')
     }
   }
