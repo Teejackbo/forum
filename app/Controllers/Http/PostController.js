@@ -6,11 +6,6 @@ const User = use('App/Models/User')
 const { validate } = use('Validator')
 const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 
-/**
- TODO:
-  Make category of post editable.
-*/
-
 class PostController {
 
   async index({ view }) {
@@ -127,6 +122,22 @@ class PostController {
     post.category_id = request.input('category')
     await post.save()
     return response.redirect(`/posts/${post.id}`)
+  }
+
+  async destroy({ params, auth, response, session }) {
+    const post = await Post.find(params.id)
+    checkUser(auth.user, post.user_id, response)
+    checkPerm(auth.user.permissions, 1, response)
+    try {
+      await post.delete()
+      session.flash({ notificationSuccess: 'Deleted the post.' })
+      return response.redirect(`/categories/${post.category_id}`)
+    }
+    catch (e) {
+      console.log(e)
+      session.flash({ notificationError: 'Unable to delete this post.' })
+      return response.redirect('back')
+    }
   }
 
 }

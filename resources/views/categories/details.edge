@@ -12,6 +12,12 @@
       <div class="post mtb-1">
         <h2>{{ post.title }}</h2>
         <p>{{ post.description }}</p>
+        @if(auth.user.id == post.user_id || auth.user.permissions > 1)
+          <form action="/posts/{{ post.id }}?_method=DELETE" method="post">
+            {{ csrfField() }}
+            <button type="submit" class="btn btn-dg">Delete</button>
+          </form>
+        @endif
       </div>
     @endeach
   @else

@@ -1,11 +1,19 @@
 @layout('layouts.main')
 
 @section('content')
-  <h2>Posts</h2>
+  <h2 class="mtb-1">Posts</h2>
   @if(posts[0])
     @each(post in posts)
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.description }}</p>
+      <div class="br-5 bigger-b-s p-1">
+        <h3 class="text-deep-orange-darken-1">{{ post.title }}</h3>
+        <p class="mtb-1">{{ post.description }}</p>
+        @if(auth.user.id == post.user_id || auth.user.permissions > 1)
+          <form action="/posts/{{ post.id }}?_method=DELETE" method="post">
+            {{ csrfField() }}
+            <button type="submit" class="btn btn-dg">Delete</button>
+          </form>
+        @endif
+      </div>
     @endeach
   @else
     <h2>Looks like there aren't any posts. Why don't you make the first one <a href="/posts/create">here</a>?</h2>
