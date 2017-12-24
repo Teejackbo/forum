@@ -11,6 +11,7 @@ class PostsSchema extends Schema {
       table.longText('body')
       table.integer('category_id')
       table.integer('user_id')
+      table.string('username')
       table.timestamps()
     })
   }

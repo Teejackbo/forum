@@ -55,6 +55,7 @@ class PostController {
     post.body = request.input('body')
     post.category_id = request.input('category')
     post.user_id = auth.user.id
+    post.username = auth.user.username
     await post.save()
     session.flash({ notificationSuccess: 'Successfully created your post.' })
     return response.redirect(`/posts/${post.id}`)

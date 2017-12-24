@@ -14,6 +14,6 @@ yarn.lock
 
 design
 
-.sassc
+*.sassc
 .sass-cache
-.css.map
+*.map

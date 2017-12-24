@@ -1644,7 +1644,8 @@ p, .text-para {
   font-family: "Montserrat", sans-serif;
   letter-spacing: 0.5px;
   line-height: 1.6;
-  font-size: 1em; }
+  font-size: 1em;
+  color: #525252; }
 
 a, .text-link {
   font-family: Raleway;
