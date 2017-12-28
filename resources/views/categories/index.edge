@@ -16,20 +16,16 @@
   @endif
   
   @if(auth.user.permissions >= 3)
-    <a href="/categories/manage">
-      <button class="btn mb-2">Manage Categories</button>
-    </a>
+    <a href="/categories/manage" class="btn">Manage Categories</a>
   @endif
   
   <ul>
     @if(categories[0])
       @each(category in categories)
-        <div class="category mtb-1 p-1 br-5 u-clear bigger-b-s">
-          <h3 class="text-deep-orange-darken-1">{{ category.title }}</h3>
-          <p class="d-ib ptb-1">{{ category.description }}</p>
-          <a href="/categories/{{ category.id }}" class="u-float-r">
-            <button class="btn btn-go">Read</button>
-          </a>
+        <div class="category">
+          <h3 class="category--title">{{ category.title }}</h3>
+          <p class="category--description">{{ category.description }}</p>
+          <a class="btn category--button" href="/categories/{{ category.id }}"><span>Read</span></a>
         </div>
       @endeach
     @else
