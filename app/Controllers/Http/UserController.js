@@ -29,7 +29,7 @@ class UserController {
     }
 
     try {
-      await auth.attempt(email, password);
+      await auth.attempt(email, password)
       session.flash({ notificationSuccess: 'Logged in successfully.' })
       return response.redirect('/')
     }
@@ -57,21 +57,21 @@ class UserController {
       'password_confirmation.required_if': 'Please confirm your password.',
       'password_confirmation.same': 'Passwords do not match.'
     }
-    
+
     const validation = await validate(request.all(), {
       username: 'required|unique:users',
       email: 'required|email|unique:users',
       password: 'required',
       password_confirmation: 'required_if:password|same:password'
     }, messages)
-    
+
     if (validation.fails()) {
       session
-      .withErrors(validation.messages())
-      .flashExcept(['password'])
+        .withErrors(validation.messages())
+        .flashExcept(['password'])
       return response.redirect('back')
     }
-    
+
     const user = new User()
     user.username = request.input('username')
     user.email = request.input('email')
@@ -88,7 +88,7 @@ class UserController {
       session.flash({ notificationSuccess: 'Logged out successfully.' })
       return response.redirect('/')
     }
-    catch(e) {
+    catch (e) {
       console.log(e)
       session.flash({ notificationError: 'Did not log out.' })
       return response.redirect('back')
