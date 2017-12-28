@@ -104,24 +104,37 @@ label {
   font-family: Raleway; }
 
 label {
-  display: block; }
+  display: block;
+  color: #3d5467;
+  margin-bottom: 0.5em; }
 
 input, textarea {
   font-family: Montserrat;
   border: 1.5px solid #3d5467;
-  border-radius: 5px;
   font-size: 1em;
-  padding: 0.3em; }
+  padding: 0.3em;
+  background: #f1edee;
+  color: #0C1713; }
 
 input {
-  width: 20em; }
+  width: 20em;
+  border: 1.5px solid transparent;
+  border-bottom-color: #3d5467;
+  outline: none; }
 
 textarea {
   width: 50em;
-  height: 5em; }
+  height: 5em;
+  border-radius: 3px; }
 
 option[selected][disabled] {
   display: none; }
+
+.form-field {
+  margin: 1em 0;
+  padding-bottom: 1em; }
+  .form-field:last-child {
+    border-bottom: 0; }
 
 .btn {
   padding: 0.5em 1em;
@@ -167,8 +180,9 @@ option[selected][disabled] {
 .alert {
   border-radius: 5px;
   padding: 1em;
+  margin-top: 1em;
   background: #686963;
-  color: white;
+  color: #f1edee;
   animation: fadeOutAfter4 4s ease-in 1 forwards; }
   .alert::after {
     content: "×";

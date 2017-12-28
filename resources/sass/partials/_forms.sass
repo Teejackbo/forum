@@ -1,19 +1,33 @@
 label
   display: block
+  color: $primary
+  margin-bottom: 0.5em
 
 input, textarea
   font-family: Montserrat
   border: 1.5px solid $primary
-  border-radius: 5px
   font-size: 1em
   padding: 0.3em
+  background: $white
+  color: $black
 
 input
   width: 20em
+  border: 1.5px solid transparent
+  border-bottom-color: $primary
+  outline: none
 
 textarea
   width: 50em
   height: 5em
+  border-radius: 3px
 
 option[selected][disabled]
   display: none
+
+.form-field
+  margin: 1em 0
+  padding-bottom: 1em
+
+  &:last-child
+    border-bottom: 0
