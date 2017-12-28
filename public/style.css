@@ -537,6 +537,11 @@ option[selected][disabled] {
     align-items: center;
     justify-content: center;
     font-size: 1.1em; }
+  .nav--navigation .nav--link.active {
+    color: #db5461;
+    transition: color 0.1s; }
+    .nav--navigation .nav--link.active:hover {
+      color: #f1edee; }
 
 .fade-in {
   animation: fadeIn 0.5s ease-in 1 forwards;

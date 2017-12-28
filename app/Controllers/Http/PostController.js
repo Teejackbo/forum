@@ -12,7 +12,8 @@ class PostController {
     const posts = await Post.all()
     return view.render('posts.index', {
       title: 'Posts',
-      posts: posts.toJSON()
+      posts: posts.toJSON(),
+      active: 'posts'
     })
   }
 
@@ -21,7 +22,8 @@ class PostController {
     const categories = await Category.all()
     return view.render('posts.create', {
       title: 'Create a Post',
-      categories: categories.toJSON()
+      categories: categories.toJSON(),
+      active: 'posts'
     })
   }
 
@@ -68,7 +70,8 @@ class PostController {
     }
     return view.render('posts.show', {
       title: post.title,
-      post: post.toJSON()
+      post: post.toJSON(),
+      active: 'posts'
     })
   }
 
@@ -85,7 +88,8 @@ class PostController {
       post: post.toJSON(),
       user: user.toJSON(),
       categories: categories.toJSON(),
-      selectedCategory: selectedCategory.toJSON()
+      selectedCategory: selectedCategory.toJSON(),
+      active: 'posts'
     })
   }
 

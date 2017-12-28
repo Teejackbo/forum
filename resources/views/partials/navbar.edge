@@ -2,15 +2,45 @@
   <div class="container nav-wrapper">
     <h1><a class="nav--title" href="/">Jack's Forum</a></h1>
     <ul class="nav--navigation">
-      <li class="nav--item"><a class="nav--link" href="/">Home</a></li>
-      <li class="nav--item"><a class="nav--link" href="{{ route('showCategories') }}">Categories</a></li>
-      <li class="nav--item"><a class="nav--link" href="/posts">Posts</a></li>
+
+      @if(active === 'home')
+        <li class="nav--item"><a class="nav--link active" href="/">Home</a></li>
+      @else
+        <li class="nav--item"><a class="nav--link" href="/">Home</a></li>
+      @endif
+
+      @if(active === 'categories')
+        <li class="nav--item"><a class="nav--link active" href="{{ route('showCategories') }}">Categories</a></li>
+      @else
+        <li class="nav--item"><a class="nav--link" href="{{ route('showCategories') }}">Categories</a></li>
+      @endif
+
+      @if(active === 'posts')
+        <li class="nav--item"><a class="nav--link active" href="/posts">Posts</a></li>
+      @else
+        <li class="nav--item"><a class="nav--link" href="/posts">Posts</a></li>
+      @endif
+
       @loggedIn
-        <li class="nav--item"><a class="nav--link" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+        @if(active === 'profile')
+          <li class="nav--item"><a class="nav--link active" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+        @else
+          <li class="nav--item"><a class="nav--link" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+        @endif
+
         <li class="nav--item"><a class="nav--link" href="{{ route('logout') }}">Logout</a></li>
       @else
-        <li class="nav--item"><a class="nav--link" href="{{ route('loginForm') }}">Login</a></li>
-        <li class="nav--item"><a class="nav--link" href="{{ route('registerForm') }}">Register</a></li>
+        @if(active === 'login')
+          <li class="nav--item"><a class="nav--link active" href="{{ route('loginForm') }}">Login</a></li>
+        @else
+          <li class="nav--item"><a class="nav--link" href="{{ route('loginForm') }}">Login</a></li>
+        @endif
+
+        @if(active === 'register')
+          <li class="nav--item"><a class="nav--link active" href="{{ route('registerForm') }}">Register</a></li>
+        @else
+          <li class="nav--item"><a class="nav--link" href="{{ route('registerForm') }}">Register</a></li>
+        @endif
       @endloggedIn
     </ul>
   </div>

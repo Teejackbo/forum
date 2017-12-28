@@ -6,7 +6,8 @@ const { validate } = use('Validator')
 class UserController {
   async index({ view }) {
     return view.render('users.login', {
-      title: 'Login'
+      title: 'Login',
+      active: 'login'
     })
   }
 
@@ -42,7 +43,8 @@ class UserController {
 
   async register({ view }) {
     return view.render('users.register', {
-      title: 'Register'
+      title: 'Register',
+      active: 'register'
     })
   }
 

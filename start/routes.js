@@ -16,7 +16,8 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome', {
-  title: "Jack's Forum"
+  title: "Jack's Forum",
+  active: 'home'
 })
 
 /*

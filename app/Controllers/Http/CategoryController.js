@@ -14,7 +14,8 @@ class CategoryController {
 
     return view.render('categories.index', {
       title: 'Categories',
-      categories: categories.toJSON()
+      categories: categories.toJSON(),
+      active: 'categories'
     })
   }
 
@@ -25,7 +26,8 @@ class CategoryController {
     return view.render('categories.details', {
       title: category.title,
       category: category.toJSON(),
-      posts: posts.toJSON()
+      posts: posts.toJSON(),
+      active: 'posts'
     })
   }
 
@@ -33,7 +35,8 @@ class CategoryController {
     checkPerm(auth.user.permissions, 2, response)
 
     return view.render('categories.add', {
-      title: 'Add a category.'
+      title: 'Add a category.',
+      active: 'categories'
     })
   }
 
@@ -71,7 +74,8 @@ class CategoryController {
 
     return view.render('categories.manage', {
       title: 'Manage Categories',
-      categories: categories.toJSON()
+      categories: categories.toJSON(),
+      active: 'categories'
     })
   }
 
@@ -96,7 +100,8 @@ class CategoryController {
       const category = await Category.find(params.id)
       return view.render('categories.edit', {
         title: 'Edit Category',
-        category: category.toJSON()
+        category: category.toJSON(),
+        active: 'categories'
       })
     }
     catch (e) {
