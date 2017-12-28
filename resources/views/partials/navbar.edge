@@ -1,58 +1,16 @@
-<nav class="bg-teal">
-  <div class="container">
-    <a href="/"><h1 class="u-float-l">Jack's Forum</h1></a>
-    <ul class="u-float-r">
-      <li>
-        <a href="/">
-          <div>
-            Home
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="{{ route('showCategories') }}">
-          <div>
-            Categories
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="/posts">
-          <div>
-            Posts
-          </div>
-        </a>
-      </li>
+<nav class="nav">
+  <div class="container nav-wrapper">
+    <h1><a class="nav--title" href="/">Jack's Forum</a></h1>
+    <ul class="nav--navigation">
+      <li class="nav--item"><a class="nav--link" href="/">Home</a></li>
+      <li class="nav--item"><a class="nav--link" href="{{ route('showCategories') }}">Categories</a></li>
+      <li class="nav--item"><a class="nav--link" href="/posts">Posts</a></li>
       @loggedIn
-        <li>
-          <a href="/profile/{{ auth.user.username }}">
-            <div>
-              {{ auth.user.username }}
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('logout') }}">
-            <div>
-              Logout
-            </div>
-          </a>
-        </li>
+        <li class="nav--item"><a class="nav--link" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+        <li class="nav--item"><a class="nav--link" href="{{ route('logout') }}">Logout</a></li>
       @else
-        <li>
-          <a href="{{ route('loginForm') }}">
-            <div>
-              Login
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('registerForm') }}">
-            <div>
-              Register
-            </div>
-          </a>
-        </li>
+        <li class="nav--item"><a class="nav--link" href="{{ route('loginForm') }}">Login</a></li>
+        <li class="nav--item"><a class="nav--link" href="{{ route('registerForm') }}">Register</a></li>
       @endloggedIn
     </ul>
   </div>

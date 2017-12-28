@@ -507,35 +507,36 @@ option[selected][disabled] {
 .alert-success {
   background: #3d5467; }
 
-nav {
-  overflow: hidden;
-  border-bottom: 5px solid #db5461;
-  background: #3d5467; }
-  nav li {
-    display: inline-block;
-    font-size: 1.1em;
-    border-radius: 5px;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
-    background: #d02c3c;
-    margin: 0.9em 0.3em;
-    position: relative;
-    transition: 0.2s; }
-    nav li div {
-      padding: 0.7em; }
-    nav li:hover {
-      background: #db5461;
-      box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
-      top: -2px; }
-    nav li:active {
-      background: #d02c3c;
-      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
-      top: 0; }
-    nav li a {
-      color: #0a0a0a; }
-  nav h1 {
-    padding: 0.7em 0;
+.nav {
+  background: #3d5467;
+  border-bottom: 5px solid #db5461; }
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.nav--title {
+  color: #db5461;
+  font-weight: normal;
+  transition: color 0.2s; }
+  .nav--title:hover {
+    color: #d02c3c; }
+
+.nav--navigation {
+  display: flex; }
+  .nav--navigation .nav--item {
+    transition: background 0.1s; }
+    .nav--navigation .nav--item:hover {
+      background: #db5461; }
+  .nav--navigation .nav--link {
     color: #f1edee;
-    font-family: "Montserrat", sans-serif; }
+    padding: 0 0.5em;
+    height: 4.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em; }
 
 .fade-in {
   animation: fadeIn 0.5s ease-in 1 forwards;
