@@ -1,9 +1,8 @@
 @layout('layouts.main')
 
 @section('content')
-  <div class="card">
-    <h2>{{ post.title }}</h2>
-    <h3>{{ post.username }}</h3>
+  <div class="view-post">
+    <h2 class="view-post--title">{{ post.title }} - by <a href="/profile/{{post.user_id}}" class="view-post--username">{{ post.username }}</a></h2>
     <p>{{ post.body }}</p>
   </div>
 @endsection

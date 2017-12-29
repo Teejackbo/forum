@@ -368,4 +368,14 @@ button.btn {
 .category--selection_option {
   font-weight: 600; }
 
+.view-post--title {
+  border-bottom: 2px solid #db5461;
+  padding-bottom: 1em; }
+
+.view-post--username {
+  color: #db5461;
+  font-weight: 500; }
+  .view-post--username:hover {
+    text-decoration: underline; }
+
 /*# sourceMappingURL=style.css.map */
