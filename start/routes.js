@@ -57,10 +57,6 @@ Route
   .middleware('auth')
 
 Route
-  .get('/categories/:id', 'CategoryController.view')
-  .as('viewCategory')
-
-Route
   .get('login', 'UserController.index')
   .as('loginForm')
 
@@ -86,6 +82,7 @@ Route.resource('posts', 'PostController')
 
 Route.get('/posts', 'PostController.index')
 Route.get('/posts/:id', 'PostController.show')
+Route.get('/posts/category/:id', 'PostController.category')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 Route.get('/permission', ({ view }) => view.render('errors.permission', { title: 'You do not have permission to view this page.' }))

@@ -19,18 +19,6 @@ class CategoryController {
     })
   }
 
-  async view({ view, params }) {
-    const category = await Category.find(params.id)
-    const posts = await category.posts().fetch()
-
-    return view.render('categories.details', {
-      title: category.title,
-      category: category.toJSON(),
-      posts: posts.toJSON(),
-      active: 'posts'
-    })
-  }
-
   async add({ view, auth, response }) {
     checkPerm(auth.user.permissions, 2, response)
 

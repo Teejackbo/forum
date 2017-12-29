@@ -348,7 +348,7 @@ button.btn {
   color: #3d5467; }
 
 .post--user_username {
-  color: #3d5467;
+  color: #db5461;
   font-weight: 400; }
   .post--user_username:hover {
     text-decoration: underline; }
@@ -361,5 +361,11 @@ button.btn {
 
 .post--delete_button {
   margin-top: 0; }
+
+.category--selection_selected {
+  display: none; }
+
+.category--selection_option {
+  font-weight: 600; }
 
 /*# sourceMappingURL=style.css.map */

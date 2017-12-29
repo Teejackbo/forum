@@ -145,6 +145,17 @@ class PostController {
     }
   }
 
+  async category({ params, view }) {
+    const category = await Category.find(params.id)
+    const posts = await category.posts().fetch()
+
+    return view.render('posts.category', {
+      title: category.title,
+      category: category.toJSON(),
+      posts: posts.toJSON(),
+      active: 'posts'
+    })
+  }
 }
 
 module.exports = PostController
