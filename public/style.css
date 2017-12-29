@@ -299,7 +299,8 @@ button.btn {
 .category--title {
   border-bottom: 2px solid #db5461;
   padding: 0.5em 0;
-  color: #db5461; }
+  color: #db5461;
+  width: 40%; }
 
 .category--description {
   margin-top: 1.2em; }
@@ -310,6 +311,13 @@ button.btn {
 .categories--manage {
   margin-bottom: 1.8em;
   margin-top: 0; }
+
+.category--delete {
+  display: inline-block;
+  padding-left: 0.5em; }
+
+.category--edit_submit {
+  margin: 0; }
 
 .posts-category {
   border-bottom: 2px solid #db5461; }
@@ -327,7 +335,8 @@ button.btn {
   border-bottom: 2px solid #db5461;
   padding: 0.5em 0;
   font-family: Raleway;
-  font-size: 1.4em; }
+  font-size: 1.4em;
+  width: 40%; }
 
 .post--title_link {
   color: #db5461;

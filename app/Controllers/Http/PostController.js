@@ -98,7 +98,7 @@ class PostController {
     const messages = {
       'title.required': 'Please enter a title.',
       'title.min': 'Title must be a minimum of 5 characters.',
-      'title.max': 'Title must be no more than 30 characters.',
+      'title.max': 'Title must be no more than 50 characters.',
       'description.required': 'Please enter a description.',
       'description.min': 'Description must be at least 20 characters.',
       'body.required': 'Please enter content.',
@@ -107,7 +107,7 @@ class PostController {
     }
 
     const validation = await validate(request.all(), {
-      title: 'required|min:5|max:30',
+      title: 'required|min:5|max:50',
       description: 'required|min:20',
       body: 'required|min:10',
       category: 'required'

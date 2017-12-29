@@ -2,9 +2,7 @@
 
 @section('content')
   <h2 class="mtb-1">Add Category</h2>
-  <a href="/categories/manage">
-    <button class="btn"><< Back</button>
-  </a>
+  <a href="/categories/manage" class="btn btn--expand_left"><span>Back</span></a>
   <form action="{{ route('storeCategory') }}" method="post">
     {{ csrfField() }}
     <div class="form-field mtb-1">
