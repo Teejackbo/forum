@@ -65,12 +65,14 @@ class PostController {
 
   async show({ view, params, response }) {
     const post = await Post.find(params.id)
+    const category = await Category.find(post.category_id)
     if (post === null) {
       return response.redirect('/404')
     }
     return view.render('posts.show', {
       title: post.title,
       post: post.toJSON(),
+      category: category.toJSON(),
       active: 'posts'
     })
   }
