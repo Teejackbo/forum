@@ -4,19 +4,19 @@
   <h2 class="ptb-1">Categories</h2>
   
   @if(old('notificationSuccess'))
-    <div class="alert alert-success mb-1">
+    <div class="alert alert-success">
       {{ old('notificationSuccess') }}
     </div>
   @endif
   
   @if(old('notificationError'))
-    <div class="alert alert-dg mb-1">
+    <div class="alert alert-dg">
       {{ old('notificationError') }}
     </div>
   @endif
   
   @if(auth.user.permissions >= 3)
-    <a href="/categories/manage" class="btn">Manage Categories</a>
+    <a href="/categories/manage" class="btn categories--manage">Manage Categories</a>
   @endif
   
   <ul>
@@ -25,7 +25,7 @@
         <div class="category">
           <h3 class="category--title">{{ category.title }}</h3>
           <p class="category--description">{{ category.description }}</p>
-          <a class="btn category--button" href="/categories/{{ category.id }}"><span>Read</span></a>
+          <a class="btn category--button btn--expand_right" href="/categories/{{ category.id }}"><span>Read</span></a>
         </div>
       @endeach
     @else

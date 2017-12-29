@@ -1,7 +1,9 @@
 .btn
   padding: 0.5em 1em
+  margin: 1em 0
   text-decoration: none
   border-radius: 3px
+  display: inline-block
   font-family: Montserrat
   font-weight: 600
   font-size: 0.9em
@@ -20,6 +22,9 @@
     background: darken($primary, 10%)
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2)
 
+button.btn
+  padding: 0.35em 1em
+
 .btn-dg
   background: $highlight
   color: $white
@@ -35,10 +40,50 @@
 .btn-container 
   display: inline-block
 
-.btn-large
-  padding: 0.7em 1em
-  font-size: 1.2em
+.btn--expand_left
+  transition: all 0.5s
 
-.btn-med
-  padding: 0.5em 0.8em
-  font-size: 1.2em
+  span
+    display: inline-block
+    position: relative
+    transition: 0.2s
+
+  span:before
+    content: '\0ab'
+    position: absolute
+    opacity: 0
+    top: -4.5px
+    left: 0
+    transition: 0.2s
+    font-size: 1.5em
+
+  &:hover span
+    padding-left: 20px
+
+  &:hover span:before
+    opacity: 1
+    right: 0
+
+.btn--expand_right
+  transition: all 0.5s
+
+  span
+    display: inline-block
+    position: relative
+    transition: 0.2s
+
+  span:after
+    content: '\0bb'
+    position: absolute
+    opacity: 0
+    top: -4.5px
+    right: -20px
+    transition: 0.2s
+    font-size: 1.5em
+
+  &:hover span
+    padding-right: 20px
+
+  &:hover span:after
+    opacity: 1
+    right: 0
