@@ -394,4 +394,65 @@ button.btn {
 .error {
   text-align: center; }
 
+.user--username {
+  display: inline-block; }
+
+.user-info {
+  margin-bottom: 1em;
+  border-bottom: 2px solid #db5461; }
+
+.user--posts {
+  width: 35%; }
+
+.user--posts_title {
+  color: #3d5467; }
+  .user--posts_title span {
+    float: right;
+    color: #db5461; }
+
+.user--posts_post {
+  padding: 1em;
+  box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.15);
+  margin: 1em 0; }
+
+.user--posts_post--buttons > a, .user--posts_post--buttons button {
+  margin: 0; }
+
+.user--posts_post--title {
+  font-size: 1.5em;
+  border-bottom: 2px solid #db5461;
+  padding-bottom: 0.5em; }
+
+.user--posts_post--title_link {
+  font-weight: 400; }
+  .user--posts_post--title_link:hover {
+    text-decoration: underline; }
+
+.user--posts_post--category_link {
+  float: right; }
+  .user--posts_post--category_link:hover {
+    text-decoration: underline; }
+
+.badge {
+  background: #686963;
+  font-family: Raleway;
+  display: inline-block;
+  color: #f1edee;
+  font-weight: 600;
+  font-size: 1em;
+  position: relative;
+  top: -2px;
+  border-radius: 100px;
+  padding: 0.4em 0.8em;
+  margin: 0 1.5em; }
+
+.badge-mod {
+  background: #3d5467; }
+
+.badge-admin {
+  background: #db5461; }
+
+.badge-banned {
+  background: #0C1713; }
+
 /*# sourceMappingURL=style.css.map */

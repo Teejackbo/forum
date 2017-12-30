@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Post = use('App/Models/Post')
 const { validate } = use('Validator')
 
 class UserController {
@@ -79,6 +80,7 @@ class UserController {
     user.email = request.input('email')
     user.password = request.input('password')
     user.permissions = 1
+    user.rank = 'User'
     await user.save()
     session.flash({ notificationSuccess: 'Registered successfully.' })
     await auth.attempt(request.input('email'), request.input('password'))
@@ -98,6 +100,16 @@ class UserController {
     }
   }
 
+  async show({ params, auth, view }) {
+    const user = await User.find(params.id)
+    const posts = await user.posts().fetch()
+    return view.render('users.show', {
+      title: user.username,
+      user: user.toJSON(),
+      posts: posts.toJSON(),
+      active: 'profile'
+    })
+  }
 }
 
 module.exports = UserController

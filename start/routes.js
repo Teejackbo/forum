@@ -76,6 +76,9 @@ Route
   .get('logout', 'UserController.logout')
   .as('logout')
 
+Route
+  .get('profile/:id', 'UserController.show')
+
 Route.resource('posts', 'PostController')
   .middleware(new Map([
     [['posts.store', 'posts.edit', 'posts.update', 'posts.destroy'], ['auth']]

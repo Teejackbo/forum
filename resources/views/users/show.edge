@@ -1,0 +1,17 @@
+@layout('layouts.main')
+
+@section('content')
+  <div class="user-info">
+    <h2 class="user--username">{{ user.username }}</h2>
+    @if(user.rank === 'Banned')
+      <div class="badge badge-banned">{{ user.rank }}</div>
+    @elseif(user.rank === 'User')
+      <div class="badge">{{ user.rank }}</div>
+    @elseif(user.rank === 'Moderator')
+      <div class="badge badge-mod">{{ user.rank }}</div>
+    @else
+      <div class="badge badge-admin">{{ user.rank }}</div>
+    @endif
+  </div>
+  @include('partials.users.posts')
+@endsection
