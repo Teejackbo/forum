@@ -222,7 +222,7 @@ button.btn {
 .alert {
   border-radius: 5px;
   padding: 1em;
-  margin-top: 1em;
+  margin: 1em 0;
   background: #686963;
   color: #f1edee;
   animation: fadeOutAfter4 4s ease-in 1 forwards; }
