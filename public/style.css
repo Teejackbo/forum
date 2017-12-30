@@ -29,7 +29,8 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1;
-  background: #f1edee; }
+  background: #f1edee;
+  margin-bottom: 1em; }
 
 ol, ul {
   list-style: none; }
@@ -91,7 +92,8 @@ p, .text-para {
 a, .text-link {
   font-family: Raleway;
   font-weight: bold;
-  text-decoration: none; }
+  text-decoration: none;
+  color: #db5461; }
 
 label {
   font-family: Raleway;
@@ -131,7 +133,7 @@ option[selected][disabled] {
   display: none; }
 
 .form-field {
-  margin: 1em 0;
+  margin: 0.7em 0;
   padding-bottom: 1em; }
   .form-field:last-child {
     border-bottom: 0; }
@@ -343,6 +345,12 @@ button.btn {
   .post--title_link:hover {
     text-decoration: underline; }
 
+.post--category_link {
+  color: #db5461;
+  float: right; }
+  .post--category_link:hover {
+    text-decoration: underline; }
+
 .post--user {
   color: #3d5467; }
 
@@ -361,6 +369,10 @@ button.btn {
 .post--delete_button {
   margin-top: 0; }
 
+.category--selection {
+  margin-bottom: 0;
+  padding-bottom: 0; }
+
 .category--selection_selected {
   display: none; }
 
@@ -376,5 +388,8 @@ button.btn {
   font-weight: 500; }
   .view-post--username:hover {
     text-decoration: underline; }
+
+.error {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

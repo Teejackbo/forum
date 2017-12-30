@@ -17,13 +17,29 @@ class PostController {
     })
   }
 
-  async create({ view, response, auth }) {
+  async create({ view, response, auth, params }) {
+    if (auth.user === null) {
+      return view.render('errors.createpost', {
+        title: 'Please create an account to view this page.'
+      })
+    }
     checkPerm(auth.user.permissions, 1, response)
     const categories = await Category.all()
+    let category;
+    if (params.category_id) {
+      category = await Category.find(params.category_id)
+      return view.render('posts.create', {
+        title: 'Create a Post',
+        categories: categories.toJSON(),
+        selectedCategory: category.toJSON(),
+        active: 'create-post'
+      })
+    }
+
     return view.render('posts.create', {
       title: 'Create a Post',
       categories: categories.toJSON(),
-      active: 'posts'
+      active: 'create-post'
     })
   }
 
@@ -51,11 +67,13 @@ class PostController {
       return response.redirect('back')
     }
 
+    const category = await Category.find(request.input('category'))
     const post = new Post()
     post.title = request.input('title')
     post.description = request.input('description')
     post.body = request.input('body')
     post.category_id = request.input('category')
+    post.category_title = category.title
     post.user_id = auth.user.id
     post.username = auth.user.username
     await post.save()

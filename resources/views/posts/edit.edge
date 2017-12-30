@@ -22,9 +22,9 @@
       <textarea name="body">{{ post.body }}</textarea>
       {{ elIf('<div class="alert alert-dg mt-1">$self</div>', getErrorFor('body'), hasErrorFor('body')) }}
     </div>
-    <div class="form-field">
+    <div class="form-field category--selection">
       <label for="category">Category</label>
-      <select name="category" class="btn category--selection">
+      <select name="category" class="btn">
         <option value="{{ post.category_id }}" class="category--selection_selected" selected>{{ selectedCategory.title }}</option>
         @each(category in categories)
           <option value="{{ category.id }}" class="category--selection_option">{{ category.title }}</option>

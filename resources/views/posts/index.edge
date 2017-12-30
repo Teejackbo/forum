@@ -1,13 +1,20 @@
 @layout('layouts.main')
 
 @section('content')
-  <h2 class="mtb-1">Posts</h2>
+  <h2>Posts</h2>
+  @if(auth.user.permissions > 0)
+    <a href="/posts/create" class="btn btn--expand_right"><span>Create Post</span></a>
+  @endif
+  @if(auth.user === null)
+    <h2>You need to create an account before you can post. To do so, click <a href="/register">here</a>.</h2>
+  @endif
   @if(posts[0])
     @each(post in posts)
       <div class="post">
         <div class="post--title">
           <a href="/posts/{{post.id}}" class="post--title_link">{{ post.title }}</a>
           <span class="post--user">by - <a href="/profile/{{post.user_id}}" class="post--user_username">{{ post.username }}</a></span>
+          <a href="/posts/category/{{post.category_id}}" class="post--category_link">{{ post.category_title }}</a>
         </div>
         <p>{{ post.description }}</p>
         <a href="/posts/{{ post.id }}" class="btn btn--expand_right"><span>Read</span></a>

@@ -77,12 +77,12 @@ Route
   .as('logout')
 
 Route.resource('posts', 'PostController')
-  .except(['index', 'show'])
-  .middleware('auth')
+  .middleware(new Map([
+    [['posts.store', 'posts.edit', 'posts.update', 'posts.destroy'], ['auth']]
+  ]))
 
-Route.get('/posts', 'PostController.index')
-Route.get('/posts/:id', 'PostController.show')
 Route.get('/posts/category/:id', 'PostController.category')
+Route.get('/posts/create/:category_id', 'PostController.create')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 Route.get('/permission', ({ view }) => view.render('errors.permission', { title: 'You do not have permission to view this page.' }))
