@@ -1,0 +1,11 @@
+@if(user.permissions === 3)
+  <form action="/users/{{user.id}}/1?_method=PUT" class="permission-form" method="post">
+    {{ csrfField() }}
+    <button type="submit" class="btn btn-dg">Revoke Admin</button>
+  </form>
+@else
+  <form action="/users/{{user.id}}/3?_method=PUT" class="permission-form" method="post">
+    {{ csrfField() }}
+    <button type="submit" class="btn btn">Make Admin</button>
+  </form>
+@endif

@@ -4,6 +4,8 @@
   <div class="badge">{{ rank }}</div>
 @elseif(rank === 'Moderator')
   <div class="badge badge-mod">{{ rank }}</div>
-@else
+@elseif(rank === 'Admin')
   <div class="badge badge-admin">{{ rank }}</div>
+@else
+  <div class="badge badge-superadmin">{{ rank }}</div>
 @endif

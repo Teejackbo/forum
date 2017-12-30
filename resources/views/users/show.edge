@@ -1,6 +1,7 @@
 @layout('layouts.main')
 
 @section('content')
+  @include('partials.users.permissionbuttons')
   <div class="user-info">
     <h2 class="user--username">{{ user.username }}</h2>
     @include('partials.users.rankbadge')

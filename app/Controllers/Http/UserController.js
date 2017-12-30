@@ -4,6 +4,7 @@ const User = use('App/Models/User')
 const Post = use('App/Models/Post')
 const Rank = use('App/Models/Rank')
 const { validate } = use('Validator')
+const { checkUser, checkPerm } = use('App/Models/Helpers/UserHelper')
 
 class UserController {
   async index({ view }) {
@@ -100,7 +101,7 @@ class UserController {
     }
   }
 
-  async show({ params, auth, view }) {
+  async show({ params, view }) {
     const user = await User.find(params.id)
     const rank = await Rank.find(user.permissions)
     const posts = await user.posts().fetch()
@@ -111,6 +112,29 @@ class UserController {
       posts: posts.toJSON(),
       active: 'profile'
     })
+  }
+
+  async changePerm({ params, auth, response, session }) {
+    checkPerm(auth.user.permissions, 2, response)
+    const user = await User.find(params.id)
+    if (params.perm < 0 || params.perm > 4) {
+      return response.redirect('back')
+    }
+    if (auth.user.permissions < user.permissions) {
+      return response.redirect('back')
+    }
+    if (auth.user.id === user.id) {
+      return response.redirect('back')
+    }
+    if (params.perm !== 4) {
+      checkPerm(auth.user.permissions, params.perm + 1, response)
+    }
+    else {
+      checkPerm(auth.user.permissions, 4, response)
+    }
+    user.permissions = params.perm
+    await user.save()
+    return response.redirect('back')
   }
 }
 

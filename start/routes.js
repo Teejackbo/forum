@@ -79,6 +79,9 @@ Route
 Route
   .get('profile/:id', 'UserController.show')
 
+Route
+  .put('/users/:id/:perm', 'UserController.changePerm')
+
 Route.resource('posts', 'PostController')
   .middleware(new Map([
     [['posts.store', 'posts.edit', 'posts.update', 'posts.destroy'], ['auth']]

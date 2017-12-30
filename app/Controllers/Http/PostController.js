@@ -101,7 +101,7 @@ class PostController {
     const selectedCategory = await Category.find(post.category_id)
     const categories = await Category.all()
 
-    checkUser(auth.user, post.user_id, response, 2)
+    checkUser(auth.user, post.user_id, response, 3)
     checkPerm(auth.user.id, 1, response)
     return view.render('posts.edit', {
       title: `Edit Post: ${post.title}`,
@@ -139,7 +139,7 @@ class PostController {
     }
 
     const post = await Post.find(params.id)
-    checkUser(auth.user, post.user_id, response, 2)
+    checkUser(auth.user, post.user_id, response, 3)
     checkPerm(auth.user.id, 1, response)
     post.title = request.input('title')
     post.description = request.input('description')

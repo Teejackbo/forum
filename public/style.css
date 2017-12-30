@@ -433,6 +433,9 @@ button.btn {
   .user--posts_post--category_link:hover {
     text-decoration: underline; }
 
+.permission-form {
+  display: inline-block; }
+
 .badge {
   background: #686963;
   font-family: Raleway;
@@ -451,6 +454,9 @@ button.btn {
 
 .badge-admin {
   background: #db5461; }
+
+.badge-superadmin {
+  background: #d02c3c; }
 
 .badge-banned {
   background: #0C1713; }
