@@ -1,0 +1,9 @@
+@if(rank === 'Banned')
+  <div class="badge badge-banned">{{ rank }}</div>
+@elseif(rank === 'User')
+  <div class="badge">{{ rank }}</div>
+@elseif(rank === 'Moderator')
+  <div class="badge badge-mod">{{ rank }}</div>
+@else
+  <div class="badge badge-admin">{{ rank }}</div>
+@endif
