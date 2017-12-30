@@ -3,7 +3,7 @@
 @section('content')
   <h2>Posts</h2>
   @if(auth.user.permissions > 0)
-    <a href="/posts/create" class="btn btn--expand_right"><span>Create Post</span></a>
+    <a href="/posts/create" class="btn btn--expand_right btn-no-margin"><span>Create Post</span></a>
   @endif
   @if(auth.user === null)
     <h2>You need to create an account before you can post. To do so, click <a href="/register">here</a>.</h2>

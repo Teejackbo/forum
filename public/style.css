@@ -216,6 +216,9 @@ button.btn {
     opacity: 1;
     right: 0; }
 
+.btn-no-margin {
+  margin: 0; }
+
 .alert {
   border-radius: 5px;
   padding: 1em;
@@ -311,8 +314,7 @@ button.btn {
   margin-top: 0; }
 
 .categories--manage {
-  margin-bottom: 1.8em;
-  margin-top: 0; }
+  margin-bottom: 1.3em; }
 
 .category--delete {
   display: inline-block; }

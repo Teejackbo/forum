@@ -48,7 +48,7 @@ class UserController {
     })
   }
 
-  async store({ request, response, session }) {
+  async store({ request, response, session, auth }) {
     const messages = {
       'username.required': 'Please choose a username.',
       'username.unique': 'Sorry, this username has already been chosen.',
@@ -81,6 +81,7 @@ class UserController {
     user.permissions = 1
     await user.save()
     session.flash({ notificationSuccess: 'Registered successfully.' })
+    await auth.attempt(request.input('email'), request.input('password'))
     return response.redirect('/')
   }
 
