@@ -151,12 +151,13 @@ class PostController {
 
   async destroy({ params, auth, response, session }) {
     const post = await Post.find(params.id)
+    const category_id = post.category_id
     checkUser(auth.user, post.user_id, response, 2)
     checkPerm(auth.user.permissions, 1, response)
     try {
       await post.delete()
       session.flash({ notificationSuccess: 'Deleted the post.' })
-      return response.redirect(`/categories/${post.category_id}`)
+      return response.redirect(`/posts/category/${category_id}`)
     }
     catch (e) {
       console.log(e)

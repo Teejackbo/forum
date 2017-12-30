@@ -3,6 +3,14 @@
 @section('content')
   <a href="/posts/category/{{post.category_id}}" class="btn btn--expand_left"><span>{{category.title}}</span></a>
   <a href="/posts" class="btn btn--expand_left"><span>All Posts</span></a>
+  @if(auth.user.permissions > 2 || post.user_id === auth.user.id)
+    <a href="/posts/{{post.id}}/edit" class="btn btn--expand_right"><span>Edit</span></a>
+  @endif
+  @if(auth.user.permissions > 1 || post.user_id === auth.user.id)
+    <form action="/posts/{{post.id}}?_method=DELETE" method="post" class="post--delete">
+      <button type="submit" class="btn btn-dg post--delete_button">Delete</button>
+    </form>
+  @endif
   <div class="view-post">
     <h2 class="view-post--title">{{ post.title }} - by <a href="/profile/{{post.user_id}}" class="view-post--username">{{ post.username }}</a></h2>
     <p>{{ post.body }}</p>
