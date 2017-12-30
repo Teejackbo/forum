@@ -435,6 +435,8 @@ button.btn {
 
 .permission-form {
   display: inline-block; }
+  .permission-form button[type="submit"] {
+    margin-bottom: 0; }
 
 .badge {
   background: #686963;
