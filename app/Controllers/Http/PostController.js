@@ -48,7 +48,6 @@ class PostController {
     const messages = {
       'title.required': 'Please enter a title.',
       'title.min': 'Title must be a minimum of 5 characters.',
-      'title.max': 'Title must be no more than 30 characters.',
       'description.required': 'Please enter a description.',
       'description.min': 'Description must be at least 20 characters.',
       'body.required': 'Please enter content.',
@@ -56,7 +55,7 @@ class PostController {
       'category.required': 'Please choose a category.'
     }
     const validation = await validate(request.all(), {
-      title: 'required|min:5|max:30',
+      title: 'required|min:5',
       description: 'required|min:20',
       body: 'required|min:10',
       category: 'required'
@@ -102,7 +101,7 @@ class PostController {
     const categories = await Category.all()
 
     checkUser(auth.user, post.user_id, response, 3)
-    checkPerm(auth.user.id, 1, response)
+    checkPerm(auth.user.permissions, 1, response)
     return view.render('posts.edit', {
       title: `Edit Post: ${post.title}`,
       post: post.toJSON(),

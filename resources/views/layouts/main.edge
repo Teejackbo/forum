@@ -10,6 +10,9 @@
 <body>
   @include('partials.navbar')
   <div class="container">
+    @if(auth.user.permissions === 0)
+      <div class="alert alert-dg">You are banned. Your permissions are now set to read only. Please contact a staff member if you wish to appeal this ban.</div>
+    @endif
     @!section('content')
   </div>
   {{ script('alerts') }}

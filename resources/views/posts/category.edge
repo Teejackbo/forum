@@ -22,14 +22,16 @@
         </div>
         <p>{{ post.description }}</p>
         <a href="/posts/{{ post.id }}" class="btn btn--expand_right"><span>Read</span></a>
-        @if(auth.user.id === post.user_id || auth.user.permissions > 2)
-          <a href="/posts/{{ post.id }}/edit" class="btn btn--expand_right"><span>Edit</span></a>
-        @endif
-        @if(auth.user.id === post.user_id || auth.user.permissions > 1)
-          <form action="/posts/{{ post.id }}?_method=DELETE" class="post--delete" method="post">
-            {{ csrfField() }}
-            <button type="submit" class="btn btn-dg post--delete_button">Delete</button>
-          </form>
+        @if(auth.user.permissions > 0)
+          @if(auth.user.id === post.user_id || auth.user.permissions > 2)
+            <a href="/posts/{{ post.id }}/edit" class="btn btn--expand_right"><span>Edit</span></a>
+          @endif
+          @if(auth.user.id === post.user_id || auth.user.permissions > 1)
+            <form action="/posts/{{ post.id }}?_method=DELETE" class="post--delete" method="post">
+              {{ csrfField() }}
+              <button type="submit" class="btn btn-dg post--delete_button">Delete</button>
+            </form>
+          @endif
         @endif
       </div>
     @endeach

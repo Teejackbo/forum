@@ -347,12 +347,6 @@ button.btn {
   .post--title_link:hover {
     text-decoration: underline; }
 
-.post--category_link {
-  color: #db5461;
-  float: right; }
-  .post--category_link:hover {
-    text-decoration: underline; }
-
 .post--user {
   color: #3d5467; }
 
@@ -426,11 +420,6 @@ button.btn {
 .user--posts_post--title_link {
   font-weight: 400; }
   .user--posts_post--title_link:hover {
-    text-decoration: underline; }
-
-.user--posts_post--category_link {
-  float: right; }
-  .user--posts_post--category_link:hover {
     text-decoration: underline; }
 
 .permission-form {
