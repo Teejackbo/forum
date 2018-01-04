@@ -52,7 +52,7 @@ class CategoryController {
     category.description = request.input('description')
     await category.save()
     session.flash({ notificationSuccess: 'Category added.' })
-    return response.redirect('/categories/manage')
+    return response.redirect('/categories')
   }
 
   async edit({ request, response, view, auth, session, params }) {
@@ -101,7 +101,7 @@ class CategoryController {
 
     session.flash({ notificationSuccess: 'Edited category.' })
 
-    return response.redirect('/categories/manage')
+    return response.redirect('/categories')
   }
 
   async destroy({ request, response, view, auth, session, params }) {
@@ -110,7 +110,7 @@ class CategoryController {
       const category = await Category.find(params.id)
       await category.delete()
       session.flash({ notificationSuccess: 'Category deleted.' })
-      return response.redirect('/categories/manage')
+      return response.redirect('/categories')
     }
     catch (e) {
       console.log(e)

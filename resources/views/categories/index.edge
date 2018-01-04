@@ -14,9 +14,9 @@
       {{ old('notificationError') }}
     </div>
   @endif
-  
-  @if(auth.user.permissions >= 3)
-    <a href="/categories/manage" class="btn categories--manage btn-no-margin">Manage Categories</a>
+
+  @if(auth.user.permissions > 2)
+    <a href="/categories/create" class="btn btn--expand_right"><span>Create Category</span></a>
   @endif
   
   <ul>
@@ -26,6 +26,13 @@
           <h3 class="category--title">{{ category.title }}</h3>
           <p class="category--description">{{ category.description }}</p>
           <a class="btn category--button btn--expand_right" href="/posts/category/{{ category.id }}"><span>View</span></a>
+          @if(auth.user.permissions > 2)
+            <a href="/categories/{{ category.id }}/edit" class="btn btn--expand_right"><span>Edit</span></a>
+            <form action="/categories/{{ category.id }}?_method=DELETE" class="category--delete" method="post">
+              {{ csrfField() }}
+              <button type="submit" class="btn btn-dg">Delete</button>
+            </form>
+          @endif
         </div>
       @endeach
     @else

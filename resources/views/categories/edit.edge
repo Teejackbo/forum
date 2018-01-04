@@ -2,7 +2,7 @@
 
 @section('content')
   <h2>Edit Category</h2>
-  <a href="/categories/manage" class="btn btn--expand_left"><span>Back</span></a>
+  <a href="/categories" class="btn btn--expand_left"><span>Back</span></a>
   <form action="/categories/{{ category.id }}?_method=DELETE" method="post" class="category--delete">
     {{ csrfField() }}
     <button type="submit" class="btn btn-dg category--delete_button">Delete Category</button>
