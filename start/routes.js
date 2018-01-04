@@ -20,41 +20,12 @@ Route.on('/').render('welcome', {
   active: 'home'
 })
 
-/*
-  TODO:
-    Refactor categories to use a route resource rather than a load of separate routes.
-*/
-
 Route
-  .get('categories', 'CategoryController.index')
-  .as('showCategories')
-
-Route
-  .get('categories/manage/add', 'CategoryController.add')
-  .middleware('auth')
-  .as('addCategory')
-
-Route
-  .post('categories/manage/add', 'CategoryController.store')
-  .middleware('auth')
-  .as('storeCategory')
-
-Route
-  .get('categories/manage', 'CategoryController.manage')
-  .middleware('auth')
-  .as('manageCategories')
-
-Route
-  .get('categories/manage/:id', 'CategoryController.edit')
-  .middleware('auth')
-
-Route
-  .delete('/categories/:id', 'CategoryController.destroy')
-  .middleware('auth')
-
-Route
-  .put('/categories/:id', 'CategoryController.update')
-  .middleware('auth')
+  .resource('categories', 'CategoryController')
+  .except(['show'])
+  .middleware(new Map([
+    [['categories.create', 'categories.store', 'categories.edit', 'categories.update', 'categories.destroy'], ['auth']]
+  ]))
 
 Route
   .get('login', 'UserController.index')

@@ -19,7 +19,7 @@ class CategoryController {
     })
   }
 
-  async add({ view, auth, response }) {
+  async create({ view, auth, response }) {
     checkPerm(auth.user.permissions, 2, response)
 
     return view.render('categories.add', {
@@ -55,33 +55,6 @@ class CategoryController {
     return response.redirect('/categories/manage')
   }
 
-  async manage({ view, auth, response }) {
-    checkPerm(auth.user.permissions, 2, response)
-
-    const categories = await Category.all()
-
-    return view.render('categories.manage', {
-      title: 'Manage Categories',
-      categories: categories.toJSON(),
-      active: 'categories'
-    })
-  }
-
-  async destroy({ request, response, view, auth, session, params }) {
-    checkPerm(auth.user.permissions, 2, response)
-    try {
-      const category = await Category.find(params.id)
-      await category.delete()
-      session.flash({ notificationSuccess: 'Category deleted.' })
-      return response.redirect('/categories/manage')
-    }
-    catch (e) {
-      console.log(e)
-      session.flash({ notificationError: 'Failed to delete category.' })
-      return response.redirect('/categories')
-    }
-  }
-
   async edit({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
     try {
@@ -94,9 +67,11 @@ class CategoryController {
     }
     catch (e) {
       session.flash({ notificationError: 'Could not find this category.' })
-      return view.render('categories.manage')
+      return response.redirect('back')
     }
   }
+
+
 
   async update({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
@@ -127,6 +102,21 @@ class CategoryController {
     session.flash({ notificationSuccess: 'Edited category.' })
 
     return response.redirect('/categories/manage')
+  }
+
+  async destroy({ request, response, view, auth, session, params }) {
+    checkPerm(auth.user.permissions, 2, response)
+    try {
+      const category = await Category.find(params.id)
+      await category.delete()
+      session.flash({ notificationSuccess: 'Category deleted.' })
+      return response.redirect('/categories/manage')
+    }
+    catch (e) {
+      console.log(e)
+      session.flash({ notificationError: 'Failed to delete category.' })
+      return response.redirect('/categories')
+    }
   }
 }
 
