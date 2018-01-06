@@ -165,8 +165,11 @@ class PostController {
     }
   }
 
-  async category({ params, view }) {
+  async category({ params, view, response }) {
     const category = await Category.find(params.id)
+    if (category === null) {
+      return response.redirect('/404')
+    }
     const posts = await category.posts().fetch()
 
     return view.render('posts.category', {

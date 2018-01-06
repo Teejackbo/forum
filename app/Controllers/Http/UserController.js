@@ -101,8 +101,11 @@ class UserController {
     }
   }
 
-  async show({ params, view }) {
+  async show({ params, view, response }) {
     const user = await User.find(params.id)
+    if (user === null) {
+      return response.redirect('/404')
+    }
     const rank = await Rank.find(user.permissions)
     const posts = await user.posts().fetch()
     return view.render('users.show', {

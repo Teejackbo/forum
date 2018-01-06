@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('content')
-  <a class="btn btn--expand_left" href="{{ route('showCategories') }}"><span>Back</span></a>
+  <a class="btn btn--expand_left" href="/categories"><span>Back</span></a>
   @if(auth.user.permissions > 0)
     <a href="/posts/create/{{category.id}}" class="btn btn--expand_right"><span>Create Post</span></a>
   @endif
