@@ -39,3 +39,58 @@
 
     &:hover
       color: $white
+
+.nav--selector
+  margin: 1em 0
+  display: none
+
+.hamburger
+  width: 2em
+  height: 5px
+  background: $highlight
+  border-radius: 5px
+
+  &:before, &:after
+    width: 2em
+    height: 5px
+    background: $highlight
+    border-radius: 5px
+    content: ''
+    display: block
+    position: relative
+
+  &:before
+    top: -10px
+
+  &:after
+    top: 5px
+
+@media(max-width: 767px)
+  .nav
+    width: 100%
+
+  .nav-wrapper
+    display: block
+
+  .nav--navigation
+    display: none
+    transition: display 0.5s
+
+    .nav--link
+      height: 3em
+    
+  .nav--item
+    border-top: 2px solid $highlight
+
+    &:first-child
+      border-top: 0
+
+  .nav--selector
+    display: flex
+    justify-content: flex-end
+    padding-bottom: 1em
+
+  .nav--title_container
+    text-align: center
+    padding: 0.5em 0
+    font-size: 2.6em

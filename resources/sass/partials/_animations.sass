@@ -2,10 +2,21 @@
   animation: fadeIn .5s ease-in 1 forwards
   opacity: 0
 
+.fade-in-short
+  animation: fadeIn .3s ease-in 1 forwards
+  opacity: 0
+
 .fade-out
   animation: fadeOut .5s ease-in 1 forwards
   opacity: 1
+
+.fade-out-short
+  animation: fadeOut .3s ease-in 1 forwards
+  opacity: 1
   
+.slide-in
+  animation: slideIn .7s ease-in 1 forwards
+
 @keyframes fadeIn 
   100%
     opacity: 1
@@ -20,3 +31,12 @@
 
   100%
     opacity: 0
+
+@keyframes slideIn
+  0%
+    opacity: 0
+    transform: translateX(100px)
+
+  100%
+    transform: translateX(0px)
+    opacity: 1

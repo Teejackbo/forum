@@ -51,6 +51,9 @@ table {
   width: 70%;
   margin: auto; }
 
+@media(max-width: 767px) {
+  .container {
+    width: 90%; } }
 .center-xy {
   display: flex;
   align-items: center;
@@ -276,13 +279,73 @@ button.btn {
     .nav--navigation .nav--link.active:hover {
       color: #f1edee; }
 
+.nav--selector {
+  margin: 1em 0;
+  display: none; }
+
+.hamburger {
+  width: 2em;
+  height: 5px;
+  background: #db5461;
+  border-radius: 5px; }
+  .hamburger:before, .hamburger:after {
+    width: 2em;
+    height: 5px;
+    background: #db5461;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    position: relative; }
+  .hamburger:before {
+    top: -10px; }
+  .hamburger:after {
+    top: 5px; }
+
+@media(max-width: 767px) {
+  .nav {
+    width: 100%; }
+
+  .nav-wrapper {
+    display: block; }
+
+  .nav--navigation {
+    display: none;
+    transition: display 0.5s; }
+    .nav--navigation .nav--link {
+      height: 3em; }
+
+  .nav--item {
+    border-top: 2px solid #db5461; }
+    .nav--item:first-child {
+      border-top: 0; }
+
+  .nav--selector {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1em; }
+
+  .nav--title_container {
+    text-align: center;
+    padding: 0.5em 0;
+    font-size: 2.6em; } }
 .fade-in {
   animation: fadeIn 0.5s ease-in 1 forwards;
+  opacity: 0; }
+
+.fade-in-short {
+  animation: fadeIn 0.3s ease-in 1 forwards;
   opacity: 0; }
 
 .fade-out {
   animation: fadeOut 0.5s ease-in 1 forwards;
   opacity: 1; }
+
+.fade-out-short {
+  animation: fadeOut 0.3s ease-in 1 forwards;
+  opacity: 1; }
+
+.slide-in {
+  animation: slideIn 0.7s ease-in 1 forwards; }
 
 @keyframes fadeIn {
   100% {
@@ -295,6 +358,13 @@ button.btn {
     opacity: 1; }
   100% {
     opacity: 0; } }
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100px); }
+  100% {
+    transform: translateX(0px);
+    opacity: 1; } }
 .category {
   box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.15);
   padding: 0.5em 1em;
