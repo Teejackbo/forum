@@ -67,6 +67,9 @@ table {
   display: flex;
   justify-content: center; }
 
+@media(max-width: 1000px) {
+  .container {
+    width: 90%; } }
 h1 {
   font-size: 2.4em;
   font-weight: 500;
@@ -130,7 +133,8 @@ input {
 textarea {
   width: 50em;
   height: 5em;
-  border-radius: 3px; }
+  border-radius: 3px;
+  max-width: 100%; }
 
 option[selected][disabled] {
   display: none; }
@@ -328,6 +332,19 @@ button.btn {
     text-align: center;
     padding: 0.5em 0;
     font-size: 2.6em; } }
+@media(max-width: 1000px) {
+  .nav-wrapper {
+    display: block; }
+
+  .nav--title_container {
+    text-align: center;
+    padding-top: 0.7em; }
+
+  .nav--navigation {
+    align-items: center;
+    justify-content: center; }
+    .nav--navigation .nav--link {
+      font-size: 1.3em; } }
 .fade-in {
   animation: fadeIn 0.5s ease-in 1 forwards;
   opacity: 0; }
@@ -468,6 +485,9 @@ button.btn {
 .user--posts {
   width: 35%; }
 
+@media(max-width: 767px) {
+  .user--posts {
+    width: 100%; } }
 .user--posts_title {
   color: #3d5467; }
   .user--posts_title span {

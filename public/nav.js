@@ -13,6 +13,6 @@ document.querySelector('.nav--selector').addEventListener('click', function() {
       children[i].classList.remove('fade-in-short');
       children[i].classList.add('fade-out-short');
     }
-    setTimeout(function(){nav.style.display = 'none'}, 400);
+    setTimeout(function(){nav.style.display = 'none'}, 420);
   }
 })
