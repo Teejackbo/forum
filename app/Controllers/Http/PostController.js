@@ -9,7 +9,13 @@ const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 class PostController {
 
   async index({ view }) {
-    const posts = await Post.all()
+    const posts = await Post
+      .query()
+      .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
+      .innerJoin('users', 'posts.user_id', 'users.id')
+      .innerJoin('categories', 'posts.category_id', 'categories.id')
+      .fetch()
+
     return view.render('posts.index', {
       title: 'Posts',
       posts: posts.toJSON(),
@@ -72,24 +78,27 @@ class PostController {
     post.description = request.input('description')
     post.body = request.input('body')
     post.category_id = request.input('category')
-    post.category_title = category.title
     post.user_id = auth.user.id
-    post.username = auth.user.username
     await post.save()
     session.flash({ notificationSuccess: 'Successfully created your post.' })
     return response.redirect(`/posts/${post.id}`)
   }
 
   async show({ view, params, response }) {
-    const post = await Post.find(params.id)
-    const category = await Category.find(post.category_id)
+    const post = await Post
+      .query()
+      .select('posts.id', 'posts.category_id', 'posts.title', 'posts.body', 'posts.user_id', 'users.username', 'categories.title as category_title')
+      .innerJoin('users', 'posts.user_id', 'users.id')
+      .innerJoin('categories', 'posts.category_id', 'categories.id')
+      .first()
+
     if (post === null) {
       return response.redirect('/404')
     }
+
     return view.render('posts.show', {
       title: post.title,
       post: post.toJSON(),
-      category: category.toJSON(),
       active: 'posts'
     })
   }

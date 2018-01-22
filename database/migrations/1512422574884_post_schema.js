@@ -10,9 +10,7 @@ class PostsSchema extends Schema {
       table.mediumText('description')
       table.longText('body')
       table.integer('category_id')
-      table.string('category_title')
       table.integer('user_id')
-      table.string('username')
       table.timestamps()
     })
   }

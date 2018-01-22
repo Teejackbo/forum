@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('content')
-  <a href="/posts/category/{{post.category_id}}" class="btn btn--expand_left"><span>{{category.title}}</span></a>
+  <a href="/posts/category/{{post.category_id}}" class="btn btn--expand_left"><span>{{post.category_title}}</span></a>
   <a href="/posts" class="btn btn--expand_left"><span>All Posts</span></a>
   @if(auth.user.permissions > 0)
     @if(auth.user.permissions > 2 || post.user_id === auth.user.id)
