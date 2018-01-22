@@ -2,7 +2,6 @@
 
 const User = use('App/Models/User')
 const Post = use('App/Models/Post')
-const Rank = use('App/Models/Rank')
 const { validate } = use('Validator')
 const { checkUser, checkPerm } = use('App/Models/Helpers/UserHelper')
 
