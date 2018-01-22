@@ -102,16 +102,21 @@ class UserController {
   }
 
   async show({ params, view, response }) {
-    const user = await User.find(params.id)
+    const user = await User
+      .query()
+      .select('users.id', 'username', 'rank', 'permissions')
+      .where('users.id', params.id)
+      .innerJoin('ranks', 'ranks.id', 'permissions')
+      .first()
+  
     if (user === null) {
       return response.redirect('/404')
     }
-    const rank = await Rank.find(user.permissions)
+
     const posts = await user.posts().fetch()
     return view.render('users.show', {
       title: user.username,
       user: user.toJSON(),
-      rank: rank.rank,
       posts: posts.toJSON(),
       active: 'profile'
     })
