@@ -11,7 +11,7 @@ class PostController {
   async index({ view }) {
     const posts = await Post
       .query()
-      .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
+      .select('posts.id', 'posts.title', 'posts.description', 'posts.user_id', 'posts.category_id', 'users.username', 'categories.title as category_title')
       .innerJoin('users', 'posts.user_id', 'users.id')
       .innerJoin('categories', 'posts.category_id', 'categories.id')
       .fetch()
@@ -181,7 +181,7 @@ class PostController {
     }
     const posts = await Post
       .query()
-      .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
+      .select('posts.id', 'posts.title', 'posts.description', 'posts.user_id', 'users.username', 'categories.title as category_title')
       .where('category_id', params.id)
       .innerJoin('users', 'posts.user_id', 'users.id')
       .innerJoin('categories', 'posts.category_id', 'categories.id')
