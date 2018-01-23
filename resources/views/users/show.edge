@@ -1,10 +1,10 @@
 @layout('layouts.main')
 
 @section('content')
-  @include('partials.users.permissionbuttons')
+  @include('users.partials.permissionbuttons')
   <div class="user-info">
     <h2 class="user--username">{{ user.username }}</h2>
-    @include('partials.users.rankbadge')
+    @include('users.partials.rankbadge')
   </div>
-  @include('partials.users.posts')
+  @include('users.partials.posts')
 @endsection

@@ -87,6 +87,7 @@ class PostController {
     const post = await Post
       .query()
       .select('posts.id', 'posts.category_id', 'posts.title', 'posts.body', 'posts.user_id', 'users.username', 'categories.title as category_title')
+      .where('posts.id', params.id)
       .innerJoin('users', 'posts.user_id', 'users.id')
       .innerJoin('categories', 'posts.category_id', 'categories.id')
       .first()
@@ -179,12 +180,12 @@ class PostController {
       return response.redirect('/404')
     }
     const posts = await Post
-    .query()
-    .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
-    .where('category_id', params.id)
-    .innerJoin('users', 'posts.user_id', 'users.id')
-    .innerJoin('categories', 'posts.category_id', 'categories.id')
-    .fetch()
+      .query()
+      .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
+      .where('category_id', params.id)
+      .innerJoin('users', 'posts.user_id', 'users.id')
+      .innerJoin('categories', 'posts.category_id', 'categories.id')
+      .fetch()
 
     return view.render('posts.category', {
       title: category.title,

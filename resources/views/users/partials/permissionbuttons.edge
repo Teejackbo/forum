@@ -1,19 +1,19 @@
 @if(auth.user.permissions > 1 && auth.user.id !== user.id)
   @if(auth.user.permissions > user.permissions)
     @if(auth.user.permissions === 2)
-      @include('partials.users.ban')
+      @include('users.partials.ban')
     @endif
 
     @if(auth.user.permissions === 3)
-      @include('partials.users.ban')
-      @include('partials.users.mod')
+      @include('users.partials.ban')
+      @include('users.partials.mod')
     @endif
   @endif
 
   @if(auth.user.permissions === 4)
-    @include('partials.users.ban')
-    @include('partials.users.mod')
-    @include('partials.users.admin')
-    @include('partials.users.superadmin')
+    @include('users.partials.ban')
+    @include('users.partials.mod')
+    @include('users.partials.admin')
+    @include('users.partials.superadmin')
   @endif
 @endif

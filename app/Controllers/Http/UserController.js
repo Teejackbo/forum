@@ -112,7 +112,15 @@ class UserController {
       return response.redirect('/404')
     }
 
-    const posts = await user.posts().fetch()
+    const posts = await Post
+      .query()
+      .select('posts.id', 'posts.title', 'posts.description', 'categories.title as category_title')
+      .where('posts.user_id', params.id)
+      .innerJoin('categories', 'posts.category_id', 'categories.id')
+      .fetch()
+
+    console.log(posts)
+
     return view.render('users.show', {
       title: user.username,
       user: user.toJSON(),
