@@ -72,7 +72,6 @@ class PostController {
       return response.redirect('back')
     }
 
-    const category = await Category.find(request.input('category'))
     const post = new Post()
     post.title = request.input('title')
     post.description = request.input('description')
@@ -179,7 +178,13 @@ class PostController {
     if (category === null) {
       return response.redirect('/404')
     }
-    const posts = await category.posts().fetch()
+    const posts = await Post
+    .query()
+    .select('posts.id', 'posts.title', 'posts.description', 'users.username', 'categories.title as category_title')
+    .where('category_id', params.id)
+    .innerJoin('users', 'posts.user_id', 'users.id')
+    .innerJoin('categories', 'posts.category_id', 'categories.id')
+    .fetch()
 
     return view.render('posts.category', {
       title: category.title,
