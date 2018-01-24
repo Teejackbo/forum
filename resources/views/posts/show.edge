@@ -17,4 +17,8 @@
     <h2 class="view-post--title">{{ post.title }} - by <a href="/profile/{{post.user_id}}" class="view-post--username">{{ post.username }}</a></h2>
     <p>{{ post.body }}</p>
   </div>
+  <h2>Comments</h2>
+  @each(comment in comments)
+    <p>{{ comment.body }}</p>
+  @endeach
 @endsection
