@@ -1,0 +1,11 @@
+@each(comment in comments)
+  <div class="comment">
+    <h3 class="comment-username"><a class="comment-username_link" href="/profile/{{comment.user_id}}">{{ comment.username }}</a></h3>
+    <p class="comment-body">{{ comment.body }}</p>
+    <div class="comment-timestamp--container">
+      <h3 class="comment-timestamp">{{ comment.created_at }}</h3>
+    </div>
+  </div>
+@else
+  <h2>Nobody has commented yet. To be the first, click <a href="/posts/{{post.id}}/comment">here</a>.</h2>
+@endeach

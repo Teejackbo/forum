@@ -3,6 +3,10 @@
 const Model = use('Model')
 
 class Post extends Model {
+  getCreatedAt(created_at) {
+    return created_at.format("dddd, MMMM Do YYYY, h:mm:ss a")
+  }
+  
   category() {
     return this.hasOne('App/Models/Category')
   }
