@@ -506,6 +506,9 @@ button.btn {
     color: #8aa29e;
     font-size: 0.9em; }
 
+.editor-container {
+  margin-top: 1.5em; }
+
 .error {
   text-align: center; }
 

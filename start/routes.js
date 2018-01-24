@@ -61,6 +61,10 @@ Route.resource('posts', 'PostController')
 Route.get('/posts/category/:id', 'PostController.category')
 Route.get('/posts/create/:category_id', 'PostController.create')
 
+Route
+  .get('/posts/:id/comment', 'CommentController.create')
+  .middleware('auth')
+
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 Route.get('/permission', ({ view }) => view.render('errors.permission', { title: 'You do not have permission to view this page.' }))
 Route.any('*', ({ response }) => response.redirect('/404'))
