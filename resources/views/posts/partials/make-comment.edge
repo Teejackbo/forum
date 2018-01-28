@@ -1,0 +1,12 @@
+@loggedIn
+  <div class="make-comment">
+    <form action="/posts/{{post.id}}/comment" method="post">
+      {{ csrfField() }}
+      <label for="comment-body">Leave a Comment</label>
+      <textarea name="comment-body"></textarea>
+      <button type="submit" class="btn btn--expand_right"><span>Comment</span></button>
+    </form>
+  </div>
+@else
+  <h2>Please login <a href="/login">here</a> to leave a comment.</h2>
+@endloggedIn

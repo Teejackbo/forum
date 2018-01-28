@@ -62,7 +62,7 @@ Route.get('/posts/category/:id', 'PostController.category')
 Route.get('/posts/create/:category_id', 'PostController.create')
 
 Route
-  .get('/posts/:id/comment', 'CommentController.create')
+  .post('/posts/:id/comment', 'CommentController.store')
   .middleware('auth')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))

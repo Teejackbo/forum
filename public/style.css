@@ -486,14 +486,18 @@ button.btn {
 .comment {
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.15);
   padding: 1.5em;
-  border-radius: 3px; }
+  border-radius: 3px;
+  margin: 1em 0; }
   .comment-username {
     padding-bottom: 0.7em;
-    width: 30%;
-    border-bottom: 1px solid #db5461; }
+    padding-right: 1.5em;
+    border-bottom: 1px solid #3d5467; }
     .comment-username_link {
-      color: #3d5467;
       font-weight: 400; }
+  .comment-index {
+    color: #8aa29e;
+    font-size: 1em;
+    align-self: flex-start; }
   .comment-timestamp--container {
     display: flex;
     align-items: center;
@@ -506,8 +510,24 @@ button.btn {
     color: #8aa29e;
     font-size: 0.9em; }
 
-.editor-container {
-  margin-top: 1.5em; }
+.make-comment {
+  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.15);
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em 0; }
+  .make-comment button {
+    display: block; }
+  .make-comment label {
+    margin-bottom: 1em;
+    margin-top: 0.2em; }
+
+.comment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.comment-info h3 {
+  display: inline-block; }
 
 .error {
   text-align: center; }

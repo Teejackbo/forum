@@ -1,8 +1,11 @@
 <h2>Comments</h2>
-<a href="/posts/{{post.id}}/comment" class="btn btn--expand_right"><span>Create Comment</span></a>
+@include('posts.partials.make-comment')
 @each(comment in comments)
   <div class="comment">
-    <h3 class="comment-username"><a class="comment-username_link" href="/profile/{{comment.user_id}}">{{ comment.username }}</a></h3>
+    <div class="comment-info">
+      <h3 class="comment-username"><a class="comment-username_link" href="/profile/{{comment.user_id}}">{{ comment.username }}</a></h3>
+      <h3 class="comment-index">Reply #{{ comments.indexOf(comment) + 1 }}</h3>
+    </div>
     <p class="comment-body">{{ comment.body }}</p>
     <div class="comment-timestamp--container">
       <h3 class="comment-timestamp">{{ comment.created_at }}</h3>
