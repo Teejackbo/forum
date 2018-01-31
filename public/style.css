@@ -87,7 +87,7 @@ h3 {
   font-size: 1.4em; }
 
 p, .text-para {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Raleway", sans-serif;
   letter-spacing: 0.4px;
   font-weight: 400;
   line-height: 1.5;
@@ -492,6 +492,8 @@ button.btn {
     padding-bottom: 0.7em;
     padding-right: 1.5em;
     border-bottom: 1px solid #3d5467; }
+    .comment-username:hover {
+      text-decoration: underline; }
     .comment-username_link {
       font-weight: 400; }
   .comment-index {

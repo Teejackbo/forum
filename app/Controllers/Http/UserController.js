@@ -119,8 +119,6 @@ class UserController {
       .innerJoin('categories', 'posts.category_id', 'categories.id')
       .fetch()
 
-    console.log(posts)
-
     return view.render('users.show', {
       title: user.username,
       user: user.toJSON(),

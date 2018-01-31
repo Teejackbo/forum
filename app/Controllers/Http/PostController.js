@@ -32,9 +32,8 @@ class PostController {
     }
     checkPerm(auth.user.permissions, 1, response)
     const categories = await Category.all()
-    let category;
     if (params.category_id) {
-      category = await Category.find(params.category_id)
+      const category = await Category.find(params.category_id)
       return view.render('posts.create', {
         title: 'Create a Post',
         categories: categories.toJSON(),
@@ -85,9 +84,6 @@ class PostController {
   }
 
   async show({ view, params, response }) {
-    try {
-
-    
     const post = await Post
       .query()
       .select('posts.id', 'posts.category_id', 'posts.title', 'posts.body', 'posts.user_id', 'posts.created_at', 'users.username', 'categories.title as category_title')
@@ -113,10 +109,6 @@ class PostController {
       comments: comments.toJSON(),
       active: 'posts'
     })
-    }
-    catch(e) {
-      console.log(e)
-    }
   }
 
   async edit({ view, params, response, auth }) {
