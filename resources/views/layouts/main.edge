@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {{ css('style') }}
-  {{ css('https://cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet') }}
   <title>{{ title }}</title>
 </head>
 <body>
@@ -16,7 +15,6 @@
     @endif
     @!section('content')
   </div>
-  {{ script('alerts') }}
-  {{ script('nav') }}
+  {{ script('bundle') }}
 </body>
 </html>

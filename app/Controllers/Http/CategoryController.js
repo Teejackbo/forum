@@ -3,13 +3,9 @@
 const Category = use('App/Models/Category')
 const { validate } = use('Validator')
 const { checkPerm } = use('App/Models/Helpers/UserHelper')
-/*
-TODO:
-  Refactor this controller to use a route resource.
-*/
 
 class CategoryController {
-  async index({ view }) {
+  async index ({ view }) {
     const categories = await Category.all()
 
     return view.render('categories.index', {
@@ -19,7 +15,7 @@ class CategoryController {
     })
   }
 
-  async create({ view, auth, response }) {
+  async create ({ view, auth, response }) {
     checkPerm(auth.user.permissions, 2, response)
 
     return view.render('categories.add', {
@@ -28,7 +24,7 @@ class CategoryController {
     })
   }
 
-  async store({ request, response, session, auth }) {
+  async store ({ request, response, session, auth }) {
     checkPerm(auth.user.permissions, 2, response)
 
     const messages = {
@@ -55,7 +51,7 @@ class CategoryController {
     return response.redirect('/categories')
   }
 
-  async edit({ request, response, view, auth, session, params }) {
+  async edit ({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
     try {
       const category = await Category.find(params.id)
@@ -64,16 +60,13 @@ class CategoryController {
         category: category.toJSON(),
         active: 'categories'
       })
-    }
-    catch (e) {
+    } catch (e) {
       session.flash({ notificationError: 'Could not find this category.' })
       return response.redirect('back')
     }
   }
 
-
-
-  async update({ request, response, view, auth, session, params }) {
+  async update ({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
 
     const messages = {
@@ -104,15 +97,14 @@ class CategoryController {
     return response.redirect('/categories')
   }
 
-  async destroy({ request, response, view, auth, session, params }) {
+  async destroy ({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
     try {
       const category = await Category.find(params.id)
       await category.delete()
       session.flash({ notificationSuccess: 'Category deleted.' })
       return response.redirect('/categories')
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e)
       session.flash({ notificationError: 'Failed to delete category.' })
       return response.redirect('/categories')

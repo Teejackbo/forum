@@ -1,13 +1,11 @@
 'use strict'
 
 const Comment = use('App/Models/Comment')
-const Post = use('App/Models/Post')
-const User = use('App/Models/User')
 const { checkPerm } = use('App/Models/Helpers/UserHelper')
 const { validate } = use('Validator')
 
 class CommentController {
-  async store({ request, response, auth, params, session }) {
+  async store ({ request, response, auth, params, session }) {
     checkPerm(auth.user.permissions, 1, response)
 
     const messages = {

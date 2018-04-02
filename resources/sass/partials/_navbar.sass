@@ -3,14 +3,14 @@
   border-bottom: 5px solid $highlight
 
 .nav-wrapper
-  display: flex
   align-items: center
+  display: flex
   justify-content: space-between
 
 .nav--title
   color: $highlight
   font-weight: normal
-  transition: color 0.2s
+  transition: color .2s
 
   &:hover
     color: darken($highlight, 10%)
@@ -19,50 +19,51 @@
   display: flex
 
   .nav--item
-    transition: background 0.1s
+    transition: background .1s
 
     &:hover
       background: $highlight
 
   .nav--link
-    color: $white
-    padding: 0 0.5em
-    height: 4.5em
-    display: flex
     align-items: center
-    justify-content: center
+    color: $white
+    display: flex
     font-size: 1.1em
-  
-  .nav--link.active
-    color: $highlight
-    transition: color 0.1s
+    height: 4.5em
+    justify-content: center
+    padding: 0 .5em
+
+    &.active
+      color: $highlight
+      transition: color .1s
 
     &:hover
       color: $white
 
 .nav--selector
-  margin: 1em 0
   display: none
+  margin: 1em 0
 
 .hamburger
-  width: 2em
-  height: 5px
   background: $highlight
   border-radius: 5px
+  height: 5px
+  width: 2em
 
-  &:before, &:after
-    width: 2em
-    height: 5px
+  &::before,
+  &::after
     background: $highlight
     border-radius: 5px
     content: ''
     display: block
+    height: 5px
     position: relative
+    width: 2em
 
-  &:before
+  &::before
     top: -10px
 
-  &:after
+  &::after
     top: 5px
 
 @media(max-width: 767px)
@@ -74,11 +75,11 @@
 
   .nav--navigation
     display: none
-    transition: display 0.5s
+    transition: display .5s
 
     .nav--link
       height: 3em
-    
+
   .nav--item
     border-top: 2px solid $highlight
 
@@ -91,17 +92,17 @@
     padding-bottom: 1em
 
   .nav--title_container
-    text-align: center
-    padding: 0.5em 0
     font-size: 2.6em
+    padding: .5em 0
+    text-align: center
 
 @media(max-width: 1000px)
   .nav-wrapper
     display: block
 
   .nav--title_container
+    padding-top: .7em
     text-align: center
-    padding-top: 0.7em
 
   .nav--navigation
     align-items: center

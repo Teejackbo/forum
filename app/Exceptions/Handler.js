@@ -18,7 +18,7 @@ class ExceptionHandler {
    *
    * @return {void}
    */
-  async handle(error, { request, response }) {
+  async handle (error, { request, response }) {
     if (error.name === 'InvalidSessionException') {
       response.redirect('/404')
     }
@@ -34,7 +34,8 @@ class ExceptionHandler {
    *
    * @return {void}
    */
-  async report(error, { request }) {
+  async report (error, { request }) {
+    console.log(error)
   }
 }
 

@@ -3,15 +3,15 @@
 const Model = use('Model')
 
 class Comment extends Model {
-  getCreatedAt(created_at) {
-    return created_at.format("dddd, MMMM Do YYYY, h:mm:ss a")
+  getCreatedAt (created_at) { //eslint-disable-line
+    return created_at.format('dddd, MMMM Do YYYY, h:mm:ss a')
   }
 
-  post() {
+  post () {
     return this.belongsTo('App/Models/Post')
   }
 
-  user() {
+  user () {
     return this.belongsTo('App/Models/User')
   }
 }

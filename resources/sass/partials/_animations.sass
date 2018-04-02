@@ -13,11 +13,14 @@
 .fade-out-short
   animation: fadeOut .3s ease-in 1 forwards
   opacity: 1
-  
+
 .slide-in
   animation: slideIn .7s ease-in 1 forwards
 
-@keyframes fadeIn 
+@keyframes fadeIn
+  0%
+    opacity: 0
+
   100%
     opacity: 1
 
@@ -38,5 +41,5 @@
     transform: translateX(100px)
 
   100%
-    transform: translateX(0px)
     opacity: 1
+    transform: translateX(0)

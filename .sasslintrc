@@ -1,0 +1,10 @@
+{
+  "name": "forum",
+  "rules": {
+    "class-name-format": 0,
+    "no-color-literals": 0
+  },
+  "files": {
+    "ignore": "resources/sass/partials/_reset.sass"
+  }
+}

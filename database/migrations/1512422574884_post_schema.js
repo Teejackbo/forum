@@ -3,7 +3,7 @@
 const Schema = use('Schema')
 
 class PostsSchema extends Schema {
-  up() {
+  up () {
     this.create('posts', table => {
       table.increments()
       table.mediumText('title')
@@ -15,7 +15,7 @@ class PostsSchema extends Schema {
     })
   }
 
-  down() {
+  down () {
     this.drop('posts')
   }
 }

@@ -3,7 +3,7 @@
 const Model = use('Model')
 
 class User extends Model {
-  static boot() {
+  static boot () {
     super.boot()
 
     /**
@@ -26,15 +26,15 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens() {
+  tokens () {
     return this.hasMany('App/Models/Token')
   }
 
-  posts() {
+  posts () {
     return this.hasMany('App/Models/Post')
   }
 
-  comments() {
+  comments () {
     return this.hasMany('App/Models/Comment')
   }
 }

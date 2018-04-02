@@ -3,17 +3,17 @@
 const User = use('App/Models/User')
 const Post = use('App/Models/Post')
 const { validate } = use('Validator')
-const { checkUser, checkPerm } = use('App/Models/Helpers/UserHelper')
+const { checkPerm } = use('App/Models/Helpers/UserHelper')
 
 class UserController {
-  async index({ view }) {
+  async index ({ view }) {
     return view.render('users.login', {
       title: 'Login',
       active: 'login'
     })
   }
 
-  async login({ request, response, auth, session }) {
+  async login ({ request, response, auth, session }) {
     const { email, password } = request.all()
 
     const messages = {
@@ -35,22 +35,21 @@ class UserController {
       await auth.attempt(email, password)
       session.flash({ notificationSuccess: 'Logged in successfully.' })
       return response.redirect('/')
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err)
       session.flash({ notificationError: 'Failed to log in. Please check your credentials.' })
       return response.redirect('back')
     }
   }
 
-  async register({ view }) {
+  async register ({ view }) {
     return view.render('users.register', {
       title: 'Register',
       active: 'register'
     })
   }
 
-  async store({ request, response, session, auth }) {
+  async store ({ request, response, session, auth }) {
     const messages = {
       'username.required': 'Please choose a username.',
       'username.unique': 'Sorry, this username has already been chosen.',
@@ -87,27 +86,26 @@ class UserController {
     return response.redirect('/')
   }
 
-  async logout({ auth, response, session }) {
+  async logout ({ auth, response, session }) {
     try {
       auth.logout()
       session.flash({ notificationSuccess: 'Logged out successfully.' })
       return response.redirect('/')
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e)
       session.flash({ notificationError: 'Did not log out.' })
       return response.redirect('back')
     }
   }
 
-  async show({ params, view, response }) {
+  async show ({ params, view, response }) {
     const user = await User
       .query()
       .select('users.id', 'username', 'rank', 'permissions')
       .where('users.id', params.id)
       .innerJoin('ranks', 'ranks.id', 'permissions')
       .first()
-  
+
     if (user === null) {
       return response.redirect('/404')
     }
@@ -127,7 +125,7 @@ class UserController {
     })
   }
 
-  async changePerm({ params, auth, response, session }) {
+  async changePerm ({ params, auth, response, session }) {
     checkPerm(auth.user.permissions, 2, response)
     const user = await User.find(params.id)
     if (params.perm < 0 || params.perm > 4) {
@@ -141,8 +139,7 @@ class UserController {
     }
     if (params.perm !== 4) {
       checkPerm(auth.user.permissions, params.perm + 1, response)
-    }
-    else {
+    } else {
       checkPerm(auth.user.permissions, 4, response)
     }
     user.permissions = params.perm

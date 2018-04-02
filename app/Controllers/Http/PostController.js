@@ -8,8 +8,7 @@ const { validate } = use('Validator')
 const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 
 class PostController {
-
-  async index({ view }) {
+  async index ({ view }) {
     const posts = await Post
       .query()
       .select('posts.id', 'posts.title', 'posts.description', 'posts.user_id', 'posts.category_id', 'users.username', 'categories.title as category_title')
@@ -24,7 +23,7 @@ class PostController {
     })
   }
 
-  async create({ view, response, auth, params }) {
+  async create ({ view, response, auth, params }) {
     if (auth.user === null) {
       return view.render('errors.createpost', {
         title: 'Please create an account to view this page.'
@@ -49,7 +48,7 @@ class PostController {
     })
   }
 
-  async store({ request, response, auth, session }) {
+  async store ({ request, response, auth, session }) {
     checkPerm(auth.user.permissions, 1, response)
     const messages = {
       'title.required': 'Please enter a title.',
@@ -83,7 +82,7 @@ class PostController {
     return response.redirect(`/posts/${post.id}`)
   }
 
-  async show({ view, params, response }) {
+  async show ({ view, params, response }) {
     const post = await Post
       .query()
       .select('posts.id', 'posts.category_id', 'posts.title', 'posts.body', 'posts.user_id', 'posts.created_at', 'users.username', 'categories.title as category_title')
@@ -111,7 +110,7 @@ class PostController {
     })
   }
 
-  async edit({ view, params, response, auth }) {
+  async edit ({ view, params, response, auth }) {
     const post = await Post.find(params.id)
     const user = await User.find(post.user_id)
     const selectedCategory = await Category.find(post.category_id)
@@ -129,8 +128,7 @@ class PostController {
     })
   }
 
-  async update({ request, response, params, auth, session }) {
-
+  async update ({ request, response, params, auth, session }) {
     const messages = {
       'title.required': 'Please enter a title.',
       'title.min': 'Title must be a minimum of 5 characters.',
@@ -165,24 +163,23 @@ class PostController {
     return response.redirect(`/posts/${post.id}`)
   }
 
-  async destroy({ params, auth, response, session }) {
+  async destroy ({ params, auth, response, session }) {
     const post = await Post.find(params.id)
-    const category_id = post.category_id
+    const categoryId = post.category_id
     checkUser(auth.user, post.user_id, response, 2)
     checkPerm(auth.user.permissions, 1, response)
     try {
       await post.delete()
       session.flash({ notificationSuccess: 'Deleted the post.' })
-      return response.redirect(`/posts/category/${category_id}`)
-    }
-    catch (e) {
+      return response.redirect(`/posts/category/${categoryId}`)
+    } catch (e) {
       console.log(e)
       session.flash({ notificationError: 'Unable to delete this post.' })
       return response.redirect('back')
     }
   }
 
-  async category({ params, view, response }) {
+  async category ({ params, view, response }) {
     const category = await Category.find(params.id)
     if (category === null) {
       return response.redirect('/404')
