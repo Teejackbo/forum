@@ -6,6 +6,7 @@ const eslint = require('gulp-eslint')
 const babel = require('gulp-babel')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify')
+const browserSync = require('browser-sync').create()
 const sassOptions = {
   errLogToConsole: true,
   outputStyle: 'compressed'
@@ -53,4 +54,14 @@ gulp.task('build-scripts', () => {
 gulp.task('watch-scripts', () => {
   return gulp
     .watch('resources/scripts/*.js', ['build-scripts'])
+})
+
+gulp.task('sync', () => {
+  browserSync.init({
+    proxy: 'localhost:3333'
+  })
+
+  gulp.watch('resources/view/**/*.edge').on('change', browserSync.reload)
+  gulp.watch('public/*.js').on('change', browserSync.reload)
+  gulp.watch('public/*.css').on('change', browserSync.reload)
 })

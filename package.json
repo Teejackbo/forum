@@ -6,7 +6,12 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
-    "test": "node ace test"
+    "test": "adonis test -t 0",
+    "sass": "gulp watch-sass",
+    "scripts": "gulp watch-scripts",
+    "sync": "gulp sync",
+    "dev": "concurrently --kill-others \"npm run start\" \"npm run sass\" \"npm run scripts\" \"npm run sync\"",
+    "lint": "gulp lint && gulp sass-lint"
   },
   "keywords": [
     "adonisjs",
@@ -32,6 +37,8 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.23.6",
+    "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.10.0",
