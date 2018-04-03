@@ -30,34 +30,31 @@ class PostController {
     }
     checkPerm(auth.user.permissions, 1, response)
     const categories = await Category.all()
+    let category = null
     if (params.category_id) {
-      const category = await Category.find(params.category_id)
-      return view.render('posts.create', {
-        title: 'Create a Post',
-        categories: categories.toJSON(),
-        selectedCategory: category.toJSON(),
-        active: 'create-post'
-      })
+      category = await Category.find(params.category_id)
+      category = category.toJSON()
     }
-
     return view.render('posts.create', {
       title: 'Create a Post',
       categories: categories.toJSON(),
+      selectedCategory: category,
       active: 'create-post'
     })
   }
 
   async store ({ request, response, auth, session }) {
     checkPerm(auth.user.permissions, 1, response)
-    const post = new Post()
-    post.title = request.input('title')
-    post.description = request.input('description')
-    post.body = request.input('body')
-    post.category_id = request.input('category')
-    post.user_id = auth.user.id
-    await post.save()
+    const { title, description, body, category } = request.all()
+    const post = await Post.create({
+      title,
+      description,
+      body,
+      category_id: category,
+      user_id: auth.user.id
+    })
     session.flash({ notificationSuccess: 'Successfully created your post.' })
-    return response.redirect(`/posts/${post.id}`)
+    return response.route('posts.show', { id: post.id })
   }
 
   async show ({ view, params, response }) {
@@ -110,25 +107,26 @@ class PostController {
     const post = await Post.find(params.id)
     checkUser(auth.user, post.user_id, response, 3)
     checkPerm(auth.user.id, 1, response)
-    post.title = request.input('title')
-    post.description = request.input('description')
-    post.body = request.input('body')
-    post.category_id = request.input('category')
+    const { title, description, body, category } = request.all()
+    post.merge({
+      title,
+      description,
+      body,
+      category_id: category
+    })
     await post.save()
-    return response.redirect(`/posts/${post.id}`)
+    return response.route('posts.show', { id: post.id })
   }
 
   async destroy ({ params, auth, response, session }) {
     const post = await Post.find(params.id)
-    const categoryId = post.category_id
     checkUser(auth.user, post.user_id, response, 2)
     checkPerm(auth.user.permissions, 1, response)
     try {
       await post.delete()
       session.flash({ notificationSuccess: 'Deleted the post.' })
-      return response.redirect(`/posts/category/${categoryId}`)
+      return response.route('postsInCategory', { category_id: post.category_id })
     } catch (e) {
-      console.log(e)
       session.flash({ notificationError: 'Unable to delete this post.' })
       return response.redirect('back')
     }
