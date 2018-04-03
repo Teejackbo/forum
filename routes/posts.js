@@ -6,6 +6,9 @@ Route.resource('posts', 'PostController')
   .middleware(new Map([
     [['posts.store', 'posts.edit', 'posts.update', 'posts.destroy'], ['auth']]
   ]))
+  .validator(new Map([
+    [['posts.store', 'posts.update'], ['Post/Store']]
+  ]))
 
 Route
   .group(() => {

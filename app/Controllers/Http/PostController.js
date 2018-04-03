@@ -4,7 +4,6 @@ const Post = use('App/Models/Post')
 const Category = use('App/Models/Category')
 const User = use('App/Models/User')
 const Comment = use('App/Models/Comment')
-const { validate } = use('Validator')
 const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
 
 class PostController {
@@ -50,27 +49,6 @@ class PostController {
 
   async store ({ request, response, auth, session }) {
     checkPerm(auth.user.permissions, 1, response)
-    const messages = {
-      'title.required': 'Please enter a title.',
-      'title.min': 'Title must be a minimum of 5 characters.',
-      'description.required': 'Please enter a description.',
-      'description.min': 'Description must be at least 20 characters.',
-      'body.required': 'Please enter content.',
-      'body.min': 'Please make sure your content is at least 10 characters.',
-      'category.required': 'Please choose a category.'
-    }
-    const validation = await validate(request.all(), {
-      title: 'required|min:5',
-      description: 'required|min:20',
-      body: 'required|min:10',
-      category: 'required'
-    }, messages)
-
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashAll()
-      return response.redirect('back')
-    }
-
     const post = new Post()
     post.title = request.input('title')
     post.description = request.input('description')
@@ -129,29 +107,6 @@ class PostController {
   }
 
   async update ({ request, response, params, auth, session }) {
-    const messages = {
-      'title.required': 'Please enter a title.',
-      'title.min': 'Title must be a minimum of 5 characters.',
-      'title.max': 'Title must be no more than 50 characters.',
-      'description.required': 'Please enter a description.',
-      'description.min': 'Description must be at least 20 characters.',
-      'body.required': 'Please enter content.',
-      'body.min': 'Please make sure your content is at least 10 characters.',
-      'category.required': 'Please select a category.'
-    }
-
-    const validation = await validate(request.all(), {
-      title: 'required|min:5|max:50',
-      description: 'required|min:20',
-      body: 'required|min:10',
-      category: 'required'
-    }, messages)
-
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashAll()
-      return response.redirect('back')
-    }
-
     const post = await Post.find(params.id)
     checkUser(auth.user, post.user_id, response, 3)
     checkPerm(auth.user.id, 1, response)
