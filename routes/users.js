@@ -34,6 +34,9 @@ Route
 
 Route
   .get('profile/:id', 'UserController.show')
+  .as('showUser')
 
 Route
   .put('/users/:id/:perm', 'UserController.changePerm')
+  .middleware('IsModerator')
+  .as('changeUserPerm')

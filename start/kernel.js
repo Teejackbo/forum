@@ -36,7 +36,12 @@ const globalMiddleware = [
 |
 */
 const namedMiddleware = {
-  auth: 'Adonis/Middleware/Auth'
+  auth: 'Adonis/Middleware/Auth',
+  IsBanned: 'App/Middleware/IsBanned',
+  IsUser: 'App/Middleware/IsUser',
+  IsModerator: 'App/Middleware/IsModerator',
+  IsAdmin: 'App/Middleware/IsAdmin',
+  IsSuperAdmin: 'App/Middleware/IsSuperAdmin'
 }
 
 /*

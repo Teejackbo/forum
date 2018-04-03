@@ -4,7 +4,7 @@ const Post = use('App/Models/Post')
 const Category = use('App/Models/Category')
 const User = use('App/Models/User')
 const Comment = use('App/Models/Comment')
-const { checkPerm, checkUser } = use('App/Models/Helpers/UserHelper')
+const { checkUser } = use('App/Models/Helpers/UserHelper')
 
 class PostController {
   async index ({ view }) {
@@ -28,7 +28,6 @@ class PostController {
         title: 'Please create an account to view this page.'
       })
     }
-    checkPerm(auth.user.permissions, 1, response)
     const categories = await Category.all()
     let category = null
     if (params.category_id) {
@@ -44,7 +43,6 @@ class PostController {
   }
 
   async store ({ request, response, auth, session }) {
-    checkPerm(auth.user.permissions, 1, response)
     const { title, description, body, category } = request.all()
     const post = await Post.create({
       title,
@@ -92,7 +90,6 @@ class PostController {
     const categories = await Category.all()
 
     checkUser(auth.user, post.user_id, response, 3)
-    checkPerm(auth.user.permissions, 1, response)
     return view.render('posts.edit', {
       title: `Edit Post: ${post.title}`,
       post: post.toJSON(),
@@ -106,7 +103,6 @@ class PostController {
   async update ({ request, response, params, auth, session }) {
     const post = await Post.find(params.id)
     checkUser(auth.user, post.user_id, response, 3)
-    checkPerm(auth.user.id, 1, response)
     const { title, description, body, category } = request.all()
     post.merge({
       title,
@@ -121,7 +117,6 @@ class PostController {
   async destroy ({ params, auth, response, session }) {
     const post = await Post.find(params.id)
     checkUser(auth.user, post.user_id, response, 2)
-    checkPerm(auth.user.permissions, 1, response)
     try {
       await post.delete()
       session.flash({ notificationSuccess: 'Deleted the post.' })
