@@ -1,7 +1,6 @@
 'use strict'
 
 const Category = use('App/Models/Category')
-const { validate } = use('Validator')
 const { checkPerm } = use('App/Models/Helpers/UserHelper')
 
 class CategoryController {
@@ -26,23 +25,6 @@ class CategoryController {
 
   async store ({ request, response, session, auth }) {
     checkPerm(auth.user.permissions, 2, response)
-
-    const messages = {
-      'title.required': 'Please enter a title.',
-      'description.required': 'Please enter a description.'
-    }
-
-    const validation = await validate(request.all(), {
-      title: 'required',
-      description: 'required'
-    }, messages)
-
-    if (validation.fails()) {
-      session
-        .withErrors(validation.messages())
-        .flashAll()
-      return response.redirect('back')
-    }
     const category = new Category()
     category.title = request.input('title')
     category.description = request.input('description')
@@ -68,24 +50,6 @@ class CategoryController {
 
   async update ({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
-
-    const messages = {
-      'title.required': 'Please enter a title.',
-      'description.required': 'Please enter a description.'
-    }
-
-    const validation = await validate(request.all(), {
-      title: 'required',
-      description: 'required'
-    }, messages)
-
-    if (validation.fails()) {
-      session
-        .withErrors(validation.messages())
-        .flashAll()
-      return response.redirect('back')
-    }
-
     const category = await Category.find(params.id)
     category.title = request.input('title')
     category.description = request.input('description')
