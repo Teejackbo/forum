@@ -9,7 +9,7 @@ class Store {
       password_confirmation: 'required_if:password|same:password'
     }
   }
-  
+
   get messages () {
     return {
       'username.required': 'Please choose a username.',

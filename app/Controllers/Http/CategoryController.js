@@ -6,7 +6,6 @@ const { checkPerm } = use('App/Models/Helpers/UserHelper')
 class CategoryController {
   async index ({ view }) {
     const categories = await Category.all()
-
     return view.render('categories.index', {
       title: 'Categories',
       categories: categories.toJSON(),
@@ -25,12 +24,10 @@ class CategoryController {
 
   async store ({ request, response, session, auth }) {
     checkPerm(auth.user.permissions, 2, response)
-    const category = new Category()
-    category.title = request.input('title')
-    category.description = request.input('description')
-    await category.save()
+    const { title, description } = request.all()
+    await category.create({ title, description })
     session.flash({ notificationSuccess: 'Category added.' })
-    return response.redirect('/categories')
+    return response.route('categories.index')
   }
 
   async edit ({ request, response, view, auth, session, params }) {
@@ -50,15 +47,12 @@ class CategoryController {
 
   async update ({ request, response, view, auth, session, params }) {
     checkPerm(auth.user.permissions, 2, response)
+    const { title, description } = request.all()
     const category = await Category.find(params.id)
-    category.title = request.input('title')
-    category.description = request.input('description')
-
+    category.merge({ title, description })
     await category.save()
-
     session.flash({ notificationSuccess: 'Edited category.' })
-
-    return response.redirect('/categories')
+    return response.route('categories.index')
   }
 
   async destroy ({ request, response, view, auth, session, params }) {
@@ -67,11 +61,11 @@ class CategoryController {
       const category = await Category.find(params.id)
       await category.delete()
       session.flash({ notificationSuccess: 'Category deleted.' })
-      return response.redirect('/categories')
+      return response.route('categories.index')
     } catch (e) {
       console.log(e)
       session.flash({ notificationError: 'Failed to delete category.' })
-      return response.redirect('/categories')
+      return response.route('categories.index')
     }
   }
 }

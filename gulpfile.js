@@ -28,7 +28,7 @@ gulp.task('watch-sass', () => {
 
 gulp.task('lint', () => {
   return gulp
-    .src(['**/*.js', '!public/*.js'])
+    .src(['**/*.js', '!public/*.js', '!node_modules/**/*'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
