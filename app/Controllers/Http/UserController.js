@@ -17,7 +17,7 @@ class UserController {
     try {
       await auth.attempt(email, password)
       session.flash({ notificationSuccess: 'Logged in successfully.' })
-      return response.redirect('/')
+      return response.route('index')
     } catch (err) {
       console.log(err)
       session.flash({ notificationError: 'Failed to log in. Please check your credentials.' })
@@ -33,27 +33,22 @@ class UserController {
   }
 
   async store ({ request, response, session, auth }) {
-    const user = new User()
-    user.username = request.input('username')
-    user.email = request.input('email')
-    user.password = request.input('password')
-    user.permissions = 1
-    await user.save()
+    const { username, email, password } = request.all()
+    await User.create({
+      username,
+      email,
+      password,
+      permissions: 1
+    })
     session.flash({ notificationSuccess: 'Registered successfully.' })
-    await auth.attempt(request.input('email'), request.input('password'))
-    return response.redirect('/')
+    await auth.attempt(email, password)
+    return response.route('index')
   }
 
   async logout ({ auth, response, session }) {
-    try {
-      auth.logout()
-      session.flash({ notificationSuccess: 'Logged out successfully.' })
-      return response.redirect('/')
-    } catch (e) {
-      console.log(e)
-      session.flash({ notificationError: 'Did not log out.' })
-      return response.redirect('back')
-    }
+    await auth.logout()
+    session.flash({ notificationSuccess: 'Logged out successfully.' })
+    return response.route('index')
   }
 
   async show ({ params, view, response }) {

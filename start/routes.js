@@ -11,6 +11,7 @@ Route.on('/').render('welcome', {
   title: "Jack's Forum",
   active: 'home'
 })
+  .as('index')
 
 Route.get('/404', ({ view }) => view.render('errors.404', { title: '404' }))
 Route.get('/permission', ({ view }) => view.render('errors.permission', { title: 'You do not have permission to view this page.' }))
