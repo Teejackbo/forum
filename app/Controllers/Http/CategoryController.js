@@ -25,7 +25,7 @@ class CategoryController {
   async store ({ request, response, session, auth }) {
     checkPerm(auth.user.permissions, 2, response)
     const { title, description } = request.all()
-    await category.create({ title, description })
+    await Category.create({ title, description })
     session.flash({ notificationSuccess: 'Category added.' })
     return response.route('categories.index')
   }

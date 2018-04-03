@@ -6,12 +6,12 @@ const { checkPerm } = use('App/Models/Helpers/UserHelper')
 class CommentController {
   async store ({ request, response, auth, params, session }) {
     checkPerm(auth.user.permissions, 1, response)
-    const comment = new Comment()
-    comment.body = request.input('comment')
-    comment.post_id = params.id
-    comment.user_id = auth.user.id
-    await comment.save()
-    return response.redirect(`/posts/${params.id}`)
+    await Comment.create({
+      body: request.input('comment'),
+      post_id: params.id,
+      user_id: auth.user.id
+    })
+    return response.route('posts.show', { id: params.id })
   }
 }
 
