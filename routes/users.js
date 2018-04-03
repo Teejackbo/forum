@@ -38,5 +38,5 @@ Route
 
 Route
   .put('/users/:id/:perm', 'UserController.changePerm')
-  .middleware('IsModerator')
+  .middleware(['IsModerator', 'CheckPermissionForChange'])
   .as('changeUserPerm')

@@ -1,13 +1,4 @@
 module.exports = {
-  checkPerm: function (perm, reqPerm, response) {
-    try {
-      if (perm < reqPerm) {
-        return response.redirect('/404')
-      }
-    } catch (e) {
-      return response.redirect('/404')
-    }
-  },
   checkUser: function (user, reqId, response, permOverride) {
     if (user.permissions >= permOverride) {
       return

@@ -2,7 +2,6 @@
 
 const User = use('App/Models/User')
 const Post = use('App/Models/Post')
-const { checkPerm } = use('App/Models/Helpers/UserHelper')
 
 class UserController {
   async index ({ view }) {
@@ -80,20 +79,6 @@ class UserController {
 
   async changePerm ({ params, auth, response, session }) {
     const user = await User.find(params.id)
-    if (params.perm < 0 || params.perm > 4) {
-      return response.redirect('back')
-    }
-    if (auth.user.permissions < user.permissions) {
-      return response.redirect('back')
-    }
-    if (auth.user.id === user.id) {
-      return response.redirect('back')
-    }
-    if (params.perm !== 4) {
-      checkPerm(auth.user.permissions, params.perm + 1, response)
-    } else {
-      checkPerm(auth.user.permissions, 4, response)
-    }
     user.permissions = params.perm
     await user.save()
     return response.redirect('back')

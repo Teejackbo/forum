@@ -41,7 +41,8 @@ const namedMiddleware = {
   IsUser: 'App/Middleware/IsUser',
   IsModerator: 'App/Middleware/IsModerator',
   IsAdmin: 'App/Middleware/IsAdmin',
-  IsSuperAdmin: 'App/Middleware/IsSuperAdmin'
+  IsSuperAdmin: 'App/Middleware/IsSuperAdmin',
+  CheckPermissionForChange: 'App/Middleware/CheckPermissionForChange'
 }
 
 /*
