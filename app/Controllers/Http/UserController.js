@@ -79,7 +79,6 @@ class UserController {
   }
 
   async changePerm ({ params, auth, response, session }) {
-    checkPerm(auth.user.permissions, 2, response)
     const user = await User.find(params.id)
     if (params.perm < 0 || params.perm > 4) {
       return response.redirect('back')
