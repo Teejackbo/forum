@@ -10,6 +10,7 @@ Route
 
     Route
       .post('/', 'UserController.login')
+      .validator('User/Login')
       .as('login')
   })
   .prefix('login')
@@ -22,6 +23,7 @@ Route
 
     Route
       .post('/', 'UserController.store')
+      .validator('User/Store')
       .as('register')
   })
   .prefix('register')

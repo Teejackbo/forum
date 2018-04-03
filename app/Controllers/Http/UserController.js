@@ -2,7 +2,6 @@
 
 const User = use('App/Models/User')
 const Post = use('App/Models/Post')
-const { validate } = use('Validator')
 const { checkPerm } = use('App/Models/Helpers/UserHelper')
 
 class UserController {
@@ -15,22 +14,6 @@ class UserController {
 
   async login ({ request, response, auth, session }) {
     const { email, password } = request.all()
-
-    const messages = {
-      'email.required': 'Please enter an email.',
-      'password.required': 'Please enter a password.'
-    }
-
-    const validation = await validate(request.all(), {
-      email: 'required',
-      password: 'required'
-    }, messages)
-
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashAll()
-      return response.redirect('back')
-    }
-
     try {
       await auth.attempt(email, password)
       session.flash({ notificationSuccess: 'Logged in successfully.' })
@@ -50,31 +33,6 @@ class UserController {
   }
 
   async store ({ request, response, session, auth }) {
-    const messages = {
-      'username.required': 'Please choose a username.',
-      'username.unique': 'Sorry, this username has already been chosen.',
-      'email.required': 'Please enter an email.',
-      'email.email': 'Sorry, this is an invalid email.',
-      'email.unique': 'This email is already registered.',
-      'password.required': 'Please enter a password.',
-      'password_confirmation.required_if': 'Please confirm your password.',
-      'password_confirmation.same': 'Passwords do not match.'
-    }
-
-    const validation = await validate(request.all(), {
-      username: 'required|unique:users',
-      email: 'required|email|unique:users',
-      password: 'required',
-      password_confirmation: 'required_if:password|same:password'
-    }, messages)
-
-    if (validation.fails()) {
-      session
-        .withErrors(validation.messages())
-        .flashExcept(['password'])
-      return response.redirect('back')
-    }
-
     const user = new User()
     user.username = request.input('username')
     user.email = request.input('email')
