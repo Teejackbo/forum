@@ -12,21 +12,21 @@ class CategoryController {
     })
   }
 
-  async create ({ view, auth, response }) {
+  async create ({ view }) {
     return view.render('categories.add', {
       title: 'Add a category.',
       active: 'categories'
     })
   }
 
-  async store ({ request, response, session, auth }) {
+  async store ({ request, response, session }) {
     const { title, description } = request.all()
     await Category.create({ title, description })
     session.flash({ notificationSuccess: 'Category added.' })
     return response.route('categories.index')
   }
 
-  async edit ({ request, response, view, auth, session, params }) {
+  async edit ({ response, view, session, params }) {
     try {
       const category = await Category.find(params.id)
       return view.render('categories.edit', {
@@ -40,7 +40,7 @@ class CategoryController {
     }
   }
 
-  async update ({ request, response, view, auth, session, params }) {
+  async update ({ request, response, session, params }) {
     const { title, description } = request.all()
     const category = await Category.find(params.id)
     category.merge({ title, description })
@@ -49,7 +49,7 @@ class CategoryController {
     return response.route('categories.index')
   }
 
-  async destroy ({ request, response, view, auth, session, params }) {
+  async destroy ({ response, session, params }) {
     try {
       const category = await Category.find(params.id)
       await category.delete()

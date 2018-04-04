@@ -3,6 +3,10 @@
 const Model = use('Model')
 
 class Post extends Model {
+  static boot () {
+    super.boot()
+    this.addTrait('Post')
+  }
   getCreatedAt (created_at) { //eslint-disable-line
     return created_at.format('dddd, MMMM Do YYYY, h:mm:ss a')
   }

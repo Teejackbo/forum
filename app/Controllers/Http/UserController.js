@@ -18,7 +18,6 @@ class UserController {
       session.flash({ notificationSuccess: 'Logged in successfully.' })
       return response.route('index')
     } catch (err) {
-      console.log(err)
       session.flash({ notificationError: 'Failed to log in. Please check your credentials.' })
       return response.redirect('back')
     }
@@ -51,23 +50,12 @@ class UserController {
   }
 
   async show ({ params, view, response }) {
-    const user = await User
-      .query()
-      .select('users.id', 'username', 'rank', 'permissions')
-      .where('users.id', params.id)
-      .innerJoin('ranks', 'ranks.id', 'permissions')
-      .first()
+    const user = await User.findAndJoinRank(params.id)
+    const posts = await Post.fetchAndJoinByUser(user.id)
 
     if (user === null) {
       return response.redirect('/404')
     }
-
-    const posts = await Post
-      .query()
-      .select('posts.id', 'posts.title', 'posts.description', 'categories.title as category_title')
-      .where('posts.user_id', params.id)
-      .innerJoin('categories', 'posts.category_id', 'categories.id')
-      .fetch()
 
     return view.render('users.show', {
       title: user.username,

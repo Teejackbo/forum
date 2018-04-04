@@ -8,13 +8,7 @@ const { checkUser } = use('App/Models/Helpers/UserHelper')
 
 class PostController {
   async index ({ view }) {
-    const posts = await Post
-      .query()
-      .select('posts.id', 'posts.title', 'posts.description', 'posts.user_id', 'posts.category_id', 'users.username', 'categories.title as category_title')
-      .innerJoin('users', 'posts.user_id', 'users.id')
-      .innerJoin('categories', 'posts.category_id', 'categories.id')
-      .fetch()
-
+    const posts = await Post.fetchAllAndJoin()
     return view.render('posts.index', {
       title: 'Posts',
       posts: posts.toJSON(),
@@ -56,24 +50,11 @@ class PostController {
   }
 
   async show ({ view, params, response }) {
-    const post = await Post
-      .query()
-      .select('posts.id', 'posts.category_id', 'posts.title', 'posts.body', 'posts.user_id', 'posts.created_at', 'users.username', 'categories.title as category_title')
-      .where('posts.id', params.id)
-      .innerJoin('users', 'posts.user_id', 'users.id')
-      .innerJoin('categories', 'posts.category_id', 'categories.id')
-      .first()
-
+    const post = await Post.findOneAndJoin(params.id)
+    const comments = await Comment.findAndJoin(params.id)
     if (post === null) {
       return response.redirect('/404')
     }
-
-    const comments = await Comment
-      .query()
-      .select('comments.id', 'comments.user_id', 'comments.body', 'comments.created_at', 'users.username')
-      .where('comments.post_id', params.id)
-      .innerJoin('users', 'comments.user_id', 'users.id')
-      .fetch()
 
     return view.render('posts.show', {
       title: post.title,
@@ -129,16 +110,10 @@ class PostController {
 
   async category ({ params, view, response }) {
     const category = await Category.find(params.id)
+    const posts = await Post.findAndJoinByCategory(params.id)
     if (category === null) {
       return response.redirect('/404')
     }
-    const posts = await Post
-      .query()
-      .select('posts.id', 'posts.title', 'posts.description', 'posts.user_id', 'users.username', 'categories.title as category_title')
-      .where('category_id', params.id)
-      .innerJoin('users', 'posts.user_id', 'users.id')
-      .innerJoin('categories', 'posts.category_id', 'categories.id')
-      .fetch()
 
     return view.render('posts.category', {
       title: category.title,

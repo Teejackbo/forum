@@ -9,6 +9,7 @@ class CommentController {
       post_id: params.id,
       user_id: auth.user.id
     })
+    session.flash({ notificationSuccess: 'Comment posted.' })
     return response.route('posts.show', { id: params.id })
   }
 }

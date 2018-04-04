@@ -3,6 +3,11 @@
 const Model = use('Model')
 
 class Comment extends Model {
+  static boot () {
+    super.boot()
+    this.addTrait('Comment')
+  }
+
   getCreatedAt (created_at) { //eslint-disable-line
     return created_at.format('dddd, MMMM Do YYYY, h:mm:ss a')
   }

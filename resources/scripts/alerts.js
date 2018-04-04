@@ -1,6 +1,6 @@
 const alerts = document.querySelectorAll('.alert')
 
-addListeners = () => { alerts.forEach(alert => alert.addEventListener('click', handleClick)) }
+const addListeners = () => { alerts.forEach(alert => alert.addEventListener('click', handleClick)) }
 
 const handleClick = e => {
   e.target.classList.add('fade-out')
