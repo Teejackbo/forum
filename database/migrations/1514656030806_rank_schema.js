@@ -4,15 +4,14 @@ const Schema = use('Schema')
 
 class RankSchema extends Schema {
   up () {
-    this.table('ranks', (table) => {
-      // alter table
+    this.create('ranks', table => {
+      table.increments()
+      table.string('rank')
     })
   }
 
   down () {
-    this.table('ranks', (table) => {
-      // reverse alternations
-    })
+    this.drop('ranks')
   }
 }
 
