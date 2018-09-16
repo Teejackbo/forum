@@ -5,13 +5,11 @@ describe('Pages', () => {
 
   it('Categories', () => {
     cy.visit('/categories')
-
     cy.get('.category')
   })
 
   it('Posts', () => {
     cy.visit('/posts')
-
     cy.get('.post')
   })
 
