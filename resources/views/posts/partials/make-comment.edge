@@ -6,7 +6,7 @@
         <label for="comment">Leave a Comment</label>
         <textarea name="comment" placeholder="Leave a comment...">{{ old('comment', '') }}</textarea>
         {{ elIf('<div class="alert alert-dg">$self</div>', getErrorFor('comment'), hasErrorFor('comment')) }}
-        <button type="submit" class="btn btn--expand_right"><span>Comment</span></button>
+        <button type="submit" class="btn"><span>Comment</span></button>
       </form>
     </div>
   @endif

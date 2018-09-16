@@ -16,7 +16,7 @@
   @endif
 
   @if(auth.user.permissions > 2)
-    <a href="/categories/create" class="btn btn--expand_right"><span>Create Category</span></a>
+    <a href="/categories/create" class="btn"><span>Create Category</span></a>
   @endif
   
   <ul>
@@ -25,9 +25,9 @@
         <div class="category">
           <h3 class="category--title">{{ category.title }}</h3>
           <p class="category--description">{{ category.description }}</p>
-          <a class="btn category--button btn--expand_right" href="/posts/category/{{ category.id }}"><span>View</span></a>
+          <a class="btn category--button" href="/posts/category/{{ category.id }}"><span>View</span></a>
           @if(auth.user.permissions > 2)
-            <a href="/categories/{{ category.id }}/edit" class="btn btn--expand_right"><span>Edit</span></a>
+            <a href="/categories/{{ category.id }}/edit" class="btn"><span>Edit</span></a>
             <form action="/categories/{{ category.id }}?_method=DELETE" class="category--delete" method="post">
               {{ csrfField() }}
               <button type="submit" class="btn btn-dg">Delete</button>

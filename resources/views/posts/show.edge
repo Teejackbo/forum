@@ -1,11 +1,11 @@
 @layout('layouts.main')
 
 @section('content')
-  <a href="{{ route('postsInCategory', { id: post.category.id }) }}" class="btn btn--expand_left"><span>{{ post.category.title }}</span></a>
-  <a href="{{ route('posts.index') }}" class="btn btn--expand_left"><span>All Posts</span></a>
+  <a href="{{ route('postsInCategory', { id: post.category.id }) }}" class="btn"><span>{{ post.category.title }}</span></a>
+  <a href="{{ route('posts.index') }}" class="btn"><span>All Posts</span></a>
   @if(auth.user.permissions > 1)
     @if(auth.user.permissions > 3 || post.user.id === auth.user.id)
-      <a href="{{ route('posts.edit', { id: post.id }) }}" class="btn btn--expand_right"><span>Edit</span></a>
+      <a href="{{ route('posts.edit', { id: post.id }) }}" class="btn"><span>Edit</span></a>
     @endif
     @if(auth.user.permissions > 2 || post.user.id === auth.user.id)
       <form action="{{ route('posts.delete', { id: post.id }) }}?_method=DELETE" method="post" class="post--delete">
