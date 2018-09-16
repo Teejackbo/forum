@@ -29,12 +29,12 @@ Factory.blueprint('App/Models/Category', (faker, i, data) => {
   }
 })
 
-Factory.blueprint('App/Models/Post', faker => {
+Factory.blueprint('App/Models/Post', (faker, i, data) => {
   return {
     title: faker.sentence({ words: 4 }),
     description: faker.sentence({ words: 15 }),
     body: faker.paragraph(),
-    category_id: faker.integer({ min: 1, max: 5 }),
-    user_id: faker.integer({ min: 1, max: 16 })
+    category_id: data.category_id,
+    user_id: data.user_id
   }
 })

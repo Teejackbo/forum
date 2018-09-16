@@ -14,9 +14,13 @@ const Factory = use('Factory')
 
 class PostSeeder {
   async run () {
-    await Factory
-      .model('App/Models/Post')
-      .createMany(15)
+    for (let i = 1; i < 17; i++) {
+      for (let j = 1; j < 6; j++) {
+        await Factory
+          .model('App/Models/Post')
+          .create({ user_id: i, category_id: j })
+      }
+    }
   }
 }
 
