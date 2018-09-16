@@ -1,7 +1,7 @@
 @loggedIn
   @if(auth.user.permissions > 0)
     <div class="make-comment">
-      <form action="/posts/{{post.id}}/comment" method="post">
+    <form action="{{ route('postComment', { id: post.id }) }}" method="post">
         {{ csrfField() }}
         <label for="comment">Leave a Comment</label>
         <textarea name="comment" placeholder="Leave a comment...">{{ old('comment', '') }}</textarea>

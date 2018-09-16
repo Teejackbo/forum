@@ -1,5 +1,6 @@
 'use strict'
 
+const Factory = use('Factory')
 const User = use('App/Models/User')
 
 class UserSeeder {
@@ -38,6 +39,26 @@ class UserSeeder {
     ]
 
     await User.createMany(users)
+
+    await Factory
+      .model('App/Models/User')
+      .createMany(3, { permissions: 1 })
+
+    await Factory
+      .model('App/Models/User')
+      .createMany(5, { permissions: 2 })
+
+    await Factory
+      .model('App/Models/User')
+      .createMany(3, { permissions: 3 })
+
+    await Factory
+      .model('App/Models/User')
+      .createMany(3, { permissions: 4 })
+
+    await Factory
+      .model('App/Models/User')
+      .createMany(2, { permissions: 5 })
   }
 }
 

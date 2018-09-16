@@ -12,11 +12,11 @@ class Post extends Model {
   }
 
   category () {
-    return this.hasOne('App/Models/Category')
+    return this.hasOne('App/Models/Category', 'category_id', 'id')
   }
 
   user () {
-    return this.hasOne('App/Models/User')
+    return this.hasOne('App/Models/User', 'user_id', 'id')
   }
 
   comments () {

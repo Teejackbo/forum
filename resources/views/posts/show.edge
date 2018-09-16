@@ -1,14 +1,15 @@
 @layout('layouts.main')
 
 @section('content')
-  <a href="/posts/category/{{post.category_id}}" class="btn btn--expand_left"><span>{{post.category_title}}</span></a>
-  <a href="/posts" class="btn btn--expand_left"><span>All Posts</span></a>
-  @if(auth.user.permissions > 0)
-    @if(auth.user.permissions > 2 || post.user_id === auth.user.id)
-      <a href="/posts/{{post.id}}/edit" class="btn btn--expand_right"><span>Edit</span></a>
+  <a href="{{ route('postsInCategory', { id: post.category.id }) }}" class="btn btn--expand_left"><span>{{ post.category.title }}</span></a>
+  <a href="{{ route('posts.index') }}" class="btn btn--expand_left"><span>All Posts</span></a>
+  @if(auth.user.permissions > 1)
+    @if(auth.user.permissions > 3 || post.user.id === auth.user.id)
+      <a href="{{ route('posts.edit', { id: post.id }) }}" class="btn btn--expand_right"><span>Edit</span></a>
     @endif
-    @if(auth.user.permissions > 1 || post.user_id === auth.user.id)
-      <form action="/posts/{{post.id}}?_method=DELETE" method="post" class="post--delete">
+    @if(auth.user.permissions > 2 || post.user.id === auth.user.id)
+      <form action="{{ route('posts.delete', { id: post.id }) }}?_method=DELETE" method="post" class="post--delete">
+        {{ csrfField() }}
         <button type="submit" class="btn btn-dg post--delete_button">Delete</button>
       </form>
     @endif

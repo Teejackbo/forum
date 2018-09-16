@@ -8,5 +8,10 @@
   @if(auth.user === null)
     <h2>You need to create an account before you can post. To do so, click <a href="/register">here</a>.</h2>
   @endif
-  @!component('posts.components.post-list', isCategory = false, posts = posts)
+  @!component('posts.components.post-list', {
+    isCategory: false,
+    auth,
+    posts,
+    csrfField
+  })
 @endsection
