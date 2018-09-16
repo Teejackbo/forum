@@ -1,41 +1,50 @@
 'use strict'
+const BaseExceptionHandler = use('BaseExceptionHandler')
+const Drive = use('Drive')
+const Mail = use('Mail')
+const Env = use('Env')
+const Helpers = use('Helpers')
 
-/**
- * This class handles all exceptions thrown during
- * the HTTP request lifecycle.
- *
- * @class ExceptionHandler
- */
-class ExceptionHandler {
-  /**
-   * Handle exception thrown during the HTTP lifecycle
-   *
-   * @method handle
-   *
-   * @param  {Object} error
-   * @param  {Object} options.request
-   * @param  {Object} options.response
-   *
-   * @return {void}
-   */
+class ExceptionHandler extends BaseExceptionHandler {
   async handle (error, { request, response }) {
-    if (error.name === 'InvalidSessionException') {
-      response.redirect('/404')
+    if (Env.get('NODE_ENV') === 'development') {
+      return super.handle(...arguments)
     }
+    if (error.name === 'InvalidSessionException') {
+      return response.redirect('404')
+    }
+    return super.handle(...arguments)
   }
 
-  /**
-   * Report exception for logging or debugging.
-   *
-   * @method report
-   *
-   * @param  {Object} error
-   * @param  {Object} options.request
-   *
-   * @return {void}
-   */
   async report (error, { request }) {
-    console.log(error)
+    if (error) {
+      if (
+        error.name !== 'ValidationException' &&
+        error.name !== 'InvalidSessionException' &&
+        Env.get('NODE_ENV') === 'production'
+      ) {
+        const data = {
+          error: error,
+          requestData: {
+            url: request.originalUrl(),
+            method: request.method()
+          }
+        }
+        await Mail.send('emails.error', data, message => {
+          message
+            .to(Env.get('ADMIN_EMAIL'))
+            .from(`errorreporting@${Env.get('DOMAIN_NAME')}`)
+            .subject(`Error - ${error.name}`)
+        })
+      }
+      const path = `${Helpers.tmpPath()}/log.txt`
+      const message = Buffer.from(`${error.message}\n`)
+      if (await Drive.exists(path)) {
+        await Drive.append(path, message)
+      } else {
+        await Drive.put(path, message)
+      }
+    }
   }
 }
 

@@ -2,7 +2,7 @@
 
 class IsSuperAdmin {
   async handle ({ response, auth }, next) {
-    if (auth.user.permissions < 4) {
+    if (auth.user.permissions < 5) {
       return response.redirect('/404')
     }
     await next()

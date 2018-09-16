@@ -36,7 +36,7 @@ class UserController {
       username,
       email,
       password,
-      permissions: 1
+      permissions: 2
     })
     session.flash({ notificationSuccess: 'Registered successfully.' })
     await auth.attempt(email, password)
