@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
-    "test": "adonis test -t 0",
+    "test": "cypress open",
     "sass": "gulp watch-sass",
     "scripts": "gulp watch-scripts",
     "sync": "gulp sync",
