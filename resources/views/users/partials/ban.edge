@@ -1,10 +1,10 @@
-@if(user.permissions === 0)
-  <form action="/users/{{user.id}}/1?_method=PUT" class="permission-form" method="post">
+@if(user.permissions === 1)
+  <form action="/users/{{user.id}}/2?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn btn-dg">Unban</button>
   </form>
 @else
-  <form action="/users/{{user.id}}/0?_method=PUT" class="permission-form" method="post">
+  <form action="/users/{{user.id}}/1?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn btn-dg">Ban</button>
   </form>

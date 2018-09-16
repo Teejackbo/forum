@@ -33,7 +33,7 @@ Route
   .as('logout')
 
 Route
-  .get('profile/:id', 'UserController.show')
+  .get('profile/:username', 'UserController.show')
   .as('showUser')
 
 Route

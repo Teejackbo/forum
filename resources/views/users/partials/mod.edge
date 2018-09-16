@@ -1,10 +1,10 @@
-@if(user.permissions === 2)
-  <form action="/users/{{user.id}}/1?_method=PUT" class="permission-form" method="post">
+@if(user.permissions === 3)
+  <form action="/users/{{user.id}}/2?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn btn-dg">Revoke Moderator</button>
   </form>
 @else
-  <form action="/users/{{user.id}}/2?_method=PUT" class="permission-form" method="post">
+  <form action="/users/{{user.id}}/3?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn">Make Moderator</button>
   </form>

@@ -3,7 +3,7 @@
 @each(comment in post.comments)
   <div class="comment">
     <div class="comment-info">
-    <h3 class="comment-username"><a class="comment-username_link" href="{{ route('showUser', { id: comment.user.id }) }}">{{ comment.user.username }}</a></h3>
+    <h3 class="comment-username"><a class="comment-username_link" href="{{ route('showUser', { username: comment.user.username }) }}">{{ comment.user.username }}</a></h3>
       <h3 class="comment-index">Reply #{{ post.comments.indexOf(comment) + 1 }}</h3>
     </div>
     <p class="comment-body">{{ comment.body }}</p>

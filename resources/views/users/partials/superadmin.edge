@@ -1,10 +1,10 @@
-@if(user.permissions === 4)
-  <form action="/users/{{user.id}}/1?_method=PUT" class="permission-form" method="post">
+@if(user.permissions === 5)
+  <form action="/users/{{user.id}}/2?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn btn-dg">Revoke Super Admin</button>
   </form>
 @else
-  <form action="/users/{{user.id}}/4?_method=PUT" class="permission-form" method="post">
+  <form action="/users/{{user.id}}/5?_method=PUT" class="permission-form" method="post">
     {{ csrfField() }}
     <button type="submit" class="btn">Make Super Admin</button>
   </form>

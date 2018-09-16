@@ -5,7 +5,6 @@ const Model = use('Model')
 class User extends Model {
   static boot () {
     super.boot()
-    this.addTrait('User')
     this.addHook('beforeCreate', 'User.hashPassword')
   }
 
@@ -29,6 +28,10 @@ class User extends Model {
 
   comments () {
     return this.hasMany('App/Models/Comment')
+  }
+
+  rank () {
+    return this.hasOne('App/Models/Rank', 'permissions', 'id')
   }
 }
 

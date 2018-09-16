@@ -50,8 +50,17 @@ class UserController {
   }
 
   async show ({ params, view, response }) {
-    const user = await User.findAndJoinRank(params.id)
-    const posts = await Post.fetchAndJoinByUser(user.id)
+    const user = await User
+      .query()
+      .where('username', params.username)
+      .with('rank')
+      .first()
+
+    const posts = await Post
+      .query()
+      .with('category')
+      .where('user_id', user.id)
+      .fetch()
 
     if (user === null) {
       return response.redirect('/404')

@@ -3,7 +3,7 @@
     <div class="post">
       <div class="post--title">
         <a href="/posts/{{ post.id }}" class="post--title_link">{{ post.title }}</a>
-        <span class="post--user">by - <a href="/profile/{{ post.user.id }}" class="post--user_username">{{ post.user.username }}</a></span>
+        <span class="post--user">by - <a href="/profile/{{ post.user.username }}" class="post--user_username">{{ post.user.username }}</a></span>
       </div>
       <p>{{ post.description }}</p>
       <a href="/posts/{{ post.id }}" class="btn btn--expand_right"><span>Read</span></a>
