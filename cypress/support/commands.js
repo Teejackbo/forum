@@ -9,14 +9,17 @@
 // ***********************************************
 
 Cypress.Commands.add('login', user => {
-  cy.get('meta[name="csrf"]').then(tag => {
+  cy.request({
+    url: '/csrf',
+    method: 'GET'
+  }).then(({ body: token }) => {
     cy.request({
       url: '/login',
       method: 'POST',
       body: {
         email: `${user}@${user}.${user}`,
         password: user,
-        _csrf: tag.attr('content')
+        _csrf: token
       }
     })
   })

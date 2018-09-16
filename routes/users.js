@@ -40,3 +40,7 @@ Route
   .put('/users/:id/:perm', 'UserController.changePerm')
   .middleware(['IsModerator', 'CheckPermissionForChange'])
   .as('changeUserPerm')
+
+Route.get('csrf', ({ session }) => {
+  return session._request.csrfToken
+})
