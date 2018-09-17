@@ -86,4 +86,14 @@ describe('Registration', () => {
     cy.contains('Registered successfully')
     cy.contains('new-user')
   })
+
+  it('Should allow you to login as the new user.', () => {
+    cy.visit('/login')
+    cy.get('input[name="email"]').type('newuser@newuser.newuser')
+    cy.get('input[name="password"]').type('newuser')
+    cy.get('form').submit()
+    cy.contains('new-user')
+    cy.contains('success')
+    cy.url().should('eq', 'http://localhost:3333/')
+  })
 })
