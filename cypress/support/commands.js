@@ -24,3 +24,10 @@ Cypress.Commands.add('login', user => {
     })
   })
 })
+
+Cypress.Commands.add('logout', () => {
+  cy.request({
+    url: '/logout',
+    method: 'GET'
+  })
+})
