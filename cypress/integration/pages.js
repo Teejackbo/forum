@@ -1,4 +1,9 @@
 describe('Pages', () => {
+  before(() => {
+    cy.exec('adonis migration:refresh')
+    cy.exec('adonis seed')
+  })
+
   it('Home', () => {
     cy.visit('')
   })

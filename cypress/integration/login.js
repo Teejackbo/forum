@@ -1,4 +1,9 @@
 describe('Login', () => {
+  before(() => {
+    cy.exec('adonis migration:refresh')
+    cy.exec('adonis seed')
+  })
+
   it('Should load the login page.', () => {
     cy.visit('/login')
 
