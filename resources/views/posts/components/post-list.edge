@@ -1,14 +1,14 @@
 @if(posts[0])
   @each(post in posts)
-    <div class="post">
+    <div class="post" data-cypress-post-{{ posts.indexOf(post) + 1 }}>
       <div class="post--title">
         <a href="/posts/{{ post.id }}" class="post--title_link">{{ post.title }}</a>
         <span class="post--user">by - <a href="/profile/{{ post.user.username }}" class="post--user_username">{{ post.user.username }}</a></span>
       </div>
       <p>{{ post.description }}</p>
-      <a href="/posts/{{ post.id }}" class="btn"><span>Read</span></a>
+      <a href="/posts/{{ post.id }}" class="btn" data-cypress-read-post-{{ posts.indexOf(post) + 1 }}><span>Read</span></a>
       @if(!isCategory)
-        <a href="/posts/category/{{ post.category.id }}" class="btn"><span>{{ post.category.title }}</span></a>
+        <a href="/posts/category/{{ post.category.id }}" class="btn" data-cypress-view-category-{{ posts.indexOf(post) + 1 }}><span>{{ post.category.title }}</span></a>
       @endif
       @if(auth.user.permissions > 1)
         @if(auth.user.id === post.user.id || auth.user.permissions > 3)
