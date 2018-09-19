@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('content')
-  <a href="{{ route('postsInCategory', { id: post.category.id }) }}" class="btn"><span>{{ post.category.title }}</span></a>
+  <a href="{{ route('postsInCategory', { id: post.category.id }) }}" class="btn" data-cypress-view-category><span>{{ post.category.title }}</span></a>
   <a href="{{ route('posts.index') }}" class="btn"><span>All Posts</span></a>
   @if(auth.user.permissions > 1)
     @if(auth.user.permissions > 3 || post.user.id === auth.user.id)

@@ -36,9 +36,9 @@
 
       @loggedIn
         @if(active === 'profile')
-          <li class="nav--item"><a class="nav--link active" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+          <li class="nav--item"><a class="nav--link active" href="/profile/{{ auth.user.username }}" data-cypress-username>{{ auth.user.username }}</a></li>
         @else
-          <li class="nav--item"><a class="nav--link" href="/profile/{{ auth.user.username }}">{{ auth.user.username }}</a></li>
+          <li class="nav--item"><a class="nav--link" href="/profile/{{ auth.user.username }}" data-cypress-username>{{ auth.user.username }}</a></li>
         @endif
 
         <li class="nav--item"><a class="nav--link" href="{{ route('logout') }}">Logout</a></li>

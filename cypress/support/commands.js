@@ -9,6 +9,7 @@
 // ***********************************************
 
 Cypress.Commands.add('login', user => {
+  cy.logout()
   cy.request({
     url: '/csrf',
     method: 'GET'
@@ -23,6 +24,7 @@ Cypress.Commands.add('login', user => {
       }
     })
   })
+  cy.log(`Logged in as ${user}.`)
 })
 
 Cypress.Commands.add('logout', () => {
@@ -30,4 +32,5 @@ Cypress.Commands.add('logout', () => {
     url: '/logout',
     method: 'GET'
   })
+  cy.log('Logged out.')
 })
