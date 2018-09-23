@@ -178,5 +178,11 @@ describe('Posts', () => {
         .click()
       cy.url().should('eq', 'http://localhost:3333/login')
     })
+
+    it('Should have a box to leave a comment if logged in.', () => {
+      cy.login('user')
+      cy.visit('/posts/1')
+      cy.get('.make-comment')
+    })
   })
 })
